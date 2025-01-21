@@ -26,7 +26,39 @@
             }
         },
         "output": {
-            "key": "item.btanfc.cheese",
+            "key": "item.btanfc.food.cheese",
+            "amount": 1,
+            "meta": 0
+        }
+    },
+    {
+        "name": "btanfc:furnace/pizza",
+        "type": "minecraft:smelting",
+        "input": {
+            "stack": {
+                "key": "item.btanfc.food.pizza.raw",
+                "amount": 1,
+                "meta": 0
+            }
+        },
+        "output": {
+            "key": "item.btanfc.food.pizza.cooked",
+            "amount": 1,
+            "meta": 0
+        }
+    },
+    {
+        "name": "btanfc:furnace/egg",
+        "type": "minecraft:smelting",
+        "input": {
+            "stack": {
+                "key": "item.egg.chicken",
+                "amount": 1,
+                "meta": 0
+            }
+        },
+        "output": {
+            "key": "item.btanfc.food.egg.cooked",
             "amount": 1,
             "meta": 0
         }

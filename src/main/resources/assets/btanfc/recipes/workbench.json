@@ -346,5 +346,38 @@
             "meta": 0
         },
         "consumeContainers": false
+    },
+    {
+        "name": "btanfc:workbench/pizza",
+        "type": "minecraft:crafting/shaped",
+        "pattern": [
+            "CCC",
+            "WWW",
+            "   "
+        ],
+        "symbols": [
+            {
+                "symbol": "C",
+                "stack": {
+                    "key": "item.btanfc.food.cheese",
+                    "amount": 1,
+                    "meta": 0
+                }
+            },
+            {
+                "symbol": "W",
+                "stack": {
+                    "key": "item.wheat",
+                    "amount": 1,
+                    "meta": 0
+                }
+            }
+        ],
+        "result": {
+            "key": "item.btanfc.food.pizza.raw",
+            "amount": 1,
+            "meta": 0
+        },
+        "consumeContainers": false
     }
 ]

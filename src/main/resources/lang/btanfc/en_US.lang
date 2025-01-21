@@ -14,4 +14,10 @@ tile.btanfc.brick.scorched_sandstone.name=Scorched Sandstone Bricks
 tile.btanfc.slab.brick.scorched_sandstone.name=Scorched Sandstone Brick Slab
 tile.btanfc.stairs.brick.scorched_sandstone.name=Scorched Sandstone Brick Stairs
 
-item.btanfc.cheese.name=Cheese
+tile.btanfc.pizza.cooked.name=Pizza
+tile.btanfc.pizza.raw.name=Raw Pizza
+
+item.btanfc.food.cheese.name=Cheese
+item.btanfc.food.pizza.cooked.name=Pizza
+item.btanfc.food.pizza.raw.name=Raw Pizza
+item.btanfc.food.egg.cooked.name=Cooked Chicken Egg

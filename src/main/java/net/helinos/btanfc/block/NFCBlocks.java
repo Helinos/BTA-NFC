@@ -3,6 +3,7 @@ package net.helinos.btanfc.block;
 import net.helinos.btanfc.BTANFC;
 import net.helinos.btanfc.block.model.BlockModelWindow;
 import net.helinos.btanfc.item.ItemBlockWindow;
+import net.helinos.btanfc.item.NFCItems;
 import net.minecraft.client.render.block.model.BlockModelSlab;
 import net.minecraft.client.render.block.model.BlockModelStairs;
 import net.minecraft.core.block.Block;
@@ -11,6 +12,7 @@ import net.minecraft.core.block.BlockSlab;
 import net.minecraft.core.block.BlockStairs;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.block.ItemBlockSlab;
 import net.minecraft.core.sound.BlockSounds;
@@ -36,8 +38,10 @@ public class NFCBlocks {
     public static Block brickScorchedSandstone;
     public static BlockSlab slabBrickScorchedSandstone;
     public static BlockStairs stairsBrickScorchedSandstone;
+    public static BlockPizza pizzaRaw;
+    public static BlockPizza pizzaCooked;
 
-    public static void init(int minimumID) {
+    public static void init() {
         BTANFC.LOGGER.info("Initializing Blocks.");
 
         window = (BlockGlass) new BlockBuilder(BTANFC.MOD_ID)
@@ -46,7 +50,7 @@ public class NFCBlocks {
             .setTags(BlockTags.MINEABLE_BY_PICKAXE, BlockTags.EXTENDS_MOTION_SENSOR_RANGE)
             .setBlockModel(BlockModelWindow::new)
             .setItemBlock(ItemBlockWindow::new)
-            .build(new BlockGlass("window", minimumID++, Material.glass));
+            .build(new BlockGlass("window", BTANFC.config.getInt("BlockIDs.window"), Material.glass));
 
         // I don't know why but this only works for 2 blocks and then it "[Client-Main/WARN] (halplibe) Could not find parent stack of '1 * tile.btanfc.window:2' in the list! does it exist? adding stack to end of list!"
         CreativeHelper.setParent(new ItemStack(window, 1, 0), new ItemStack(Block.glass.id, 1, 0, null));
@@ -59,7 +63,7 @@ public class NFCBlocks {
             .setHardness(0.5F)
             .setTags(BlockTags.MINEABLE_BY_SHOVEL, BlockTags.GROWS_SUGAR_CANE, BlockTags.GROWS_CACTI, BlockTags.CAVES_CUT_THROUGH, BlockTags.INFINITE_BURN)
             .setTextures("btanfc:block/scorched_sand")
-            .build(new BlockScorchedSand("scorched_sand", minimumID++));
+            .build(new BlockScorchedSand("scorched_sand", BTANFC.config.getInt("BlockIDs.scorchedSand")));
 
         scorchedSandstone = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.STONE)
@@ -68,24 +72,26 @@ public class NFCBlocks {
             .setTopTexture("btanfc:block/scorched_sandstone_top")
             .setSideTextures("btanfc:block/scorched_sandstone_side")
             .setBottomTexture("btanfc:block/scorched_sandstone_bottom")
-            .build(new Block("scorched_sandstone", minimumID++, Material.stone));
+            .build(new Block("scorched_sandstone", BTANFC.config.getInt("BlockIDs.scorchedSandstone"), Material.stone));
 
         slabScorchedSandstone = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.STONE)
             .setHardness(0.8F)
             .setUseInternalLight()
+            .setVisualUpdateOnMetadata()
             .setTags(BlockTags.MINEABLE_BY_PICKAXE)
             .setBlockModel(BlockModelSlab::new)
             .setItemBlock(ItemBlockSlab::new)
-            .build(new BlockSlab(scorchedSandstone, minimumID++));
+            .build(new BlockSlab(scorchedSandstone, BTANFC.config.getInt("BlockIDs.slabScorchedSandstone")));
 
         stairsScorchedSandstone = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.STONE)
             .setHardness(0.8F)
             .setUseInternalLight()
+            .setVisualUpdateOnMetadata()
             .setTags(BlockTags.MINEABLE_BY_PICKAXE)
             .setBlockModel(BlockModelStairs::new)
-            .build(new BlockStairs(scorchedSandstone, minimumID++));
+            .build(new BlockStairs(scorchedSandstone, BTANFC.config.getInt("BlockIDs.stairsScorchedSandstone")));
 
         brickScorchedSandstone = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.STONE)
@@ -93,26 +99,49 @@ public class NFCBlocks {
             .setResistance(10.0F)
             .setTags(BlockTags.MINEABLE_BY_PICKAXE)
             .setTextures("btanfc:block/scorched_sandstone_bricks")
-            .build(new Block("brick.scorched_sandstone", minimumID++, Material.stone));
+            .build(new Block("brick.scorched_sandstone", BTANFC.config.getInt("BlockIDs.brickScorchedSandstone"), Material.stone));
         
         slabBrickScorchedSandstone = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.STONE)
             .setHardness(0.8F)
             .setResistance(10.0F)
             .setUseInternalLight()
+            .setVisualUpdateOnMetadata()
             .setTags(BlockTags.MINEABLE_BY_PICKAXE)
             .setBlockModel(BlockModelSlab::new)
             .setItemBlock(ItemBlockSlab::new)
-            .build(new BlockSlab(brickScorchedSandstone, minimumID++));
+            .build(new BlockSlab(brickScorchedSandstone, BTANFC.config.getInt("BlockIDs.slabBrickScorchedSandstone")));
 
         stairsBrickScorchedSandstone = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.STONE)
             .setHardness(0.8F)
             .setResistance(10.0F)
             .setUseInternalLight()
+            .setVisualUpdateOnMetadata()
             .setTags(BlockTags.MINEABLE_BY_PICKAXE)
             .setBlockModel(BlockModelStairs::new)
-            .build(new BlockStairs(brickScorchedSandstone, minimumID++));
+            .build(new BlockStairs(brickScorchedSandstone, BTANFC.config.getInt("BlockIDs.stairsBrickScorchedSandstone")));
+
+        pizzaRaw = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.CLOTH)
+            .setHardness(0.5F)
+            .setVisualUpdateOnMetadata()
+            .setTags(BlockTags.BROKEN_BY_FLUIDS, BlockTags.NOT_IN_CREATIVE_MENU)
+            .setTopTexture("btanfc:block/pizza_raw_top")
+            .setSideTextures("btanfc:block/pizza_raw_side")
+            .setBottomTexture("btanfc:block/pizza_raw_bottom")
+            .build(new BlockPizza("pizza.raw", BTANFC.config.getInt("BlockIDs.pizzaRaw"), 3, () -> (Item) NFCItems.foodPizzaRaw));
+
+        pizzaCooked = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.CLOTH)
+            .setHardness(0.5F)
+            .setVisualUpdateOnMetadata()
+            .setTags(BlockTags.BROKEN_BY_FLUIDS, BlockTags.NOT_IN_CREATIVE_MENU)
+            .setTopTexture("btanfc:block/pizza_cooked_top")
+            .setSideTextures("btanfc:block/pizza_cooked_side")
+            .setBottomTexture("btanfc:block/pizza_cooked_bottom")
+            .build(new BlockPizza("pizza.cooked", BTANFC.config.getInt("BlockIDs.pizzaCooked"), 5, () -> (Item) NFCItems.foodPizzaCooked));
+
 
         BTANFC.LOGGER.info("Initialized Blocks.");
     }
