@@ -14,5 +14,21 @@
             "amount": 1,
             "meta": 6
         }
+    },
+    {
+        "name": "btanfc:furnace/cheese",
+        "type": "minecraft:smelting",
+        "input": {
+            "stack": {
+                "key": "item.bucket.milk",
+                "amount": 1,
+                "meta": 0
+            }
+        },
+        "output": {
+            "key": "item.btanfc.cheese",
+            "amount": 1,
+            "meta": 0
+        }
     }
 ]

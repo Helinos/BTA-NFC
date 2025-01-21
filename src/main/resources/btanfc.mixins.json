@@ -4,7 +4,8 @@
   "package": "net.helinos.btanfc.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ChunkDecoratorNetherMixin"
+    "ChunkDecoratorNetherMixin",
+    "TileEntityFurnaceMixin"
   ],
   "client": [],
   "injectors": {
