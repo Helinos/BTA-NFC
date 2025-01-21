@@ -32,7 +32,6 @@ public class NFCRecipes implements RecipeEntrypoint {
     public void load() {
         DataLoader.loadRecipesFromFile("/assets/btanfc/recipes/workbench.json");
         DataLoader.loadRecipesFromFile("/assets/btanfc/recipes/furnace.json");
-        BTANFC.LOGGER.info("Registered {} recipes from {} groups.", RECIPE_NAMESPACE.getAllRecipes().size(), RECIPE_NAMESPACE.size());
     }
 
     public void resetGroups() {

@@ -11,12 +11,11 @@ import net.minecraft.core.block.BlockSlab;
 import net.minecraft.core.block.BlockStairs;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
-//import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.block.ItemBlockSlab;
-//import net.minecraft.core.item.block.ItemBlockStairsPainted;
 import net.minecraft.core.sound.BlockSounds;
 import turniplabs.halplibe.helper.BlockBuilder;
-//import turniplabs.halplibe.helper.CreativeHelper;
+import turniplabs.halplibe.helper.CreativeHelper;
 
 public class NFCBlocks {
     public static final String[] windowTypes = new String[] {
@@ -50,10 +49,10 @@ public class NFCBlocks {
             .build(new BlockGlass("window", minimumID++, Material.glass));
 
         // I don't know why but this only works for 2 blocks and then it "[Client-Main/WARN] (halplibe) Could not find parent stack of '1 * tile.btanfc.window:2' in the list! does it exist? adding stack to end of list!"
-        //CreativeHelper.setParent(new ItemStack(window, 1, 0), new ItemStack(Block.glass.id, 1, 0, null));
-        //for (int index = 1; index < windowTypes.length; index++) {
-        //    CreativeHelper.setParent(new ItemStack(window, 1, index), new ItemStack(window, 1, index - 1));
-        //}
+        CreativeHelper.setParent(new ItemStack(window, 1, 0), new ItemStack(Block.glass.id, 1, 0, null));
+        for (int index = 1; index < windowTypes.length; index++) {
+           CreativeHelper.setParent(new ItemStack(window, 1, index), new ItemStack(window, 1, index - 1));
+        }
 
         scorchedSand = (BlockScorchedSand) new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.SAND)
