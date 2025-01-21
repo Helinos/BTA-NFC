@@ -1,6 +1,7 @@
 .gradle/
 .idea/
 build/
+.vscode/
 out/
 run/
 run-server/
