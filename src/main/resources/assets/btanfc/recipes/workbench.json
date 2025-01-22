@@ -379,5 +379,30 @@
             "meta": 0
         },
         "consumeContainers": false
+    },
+    {
+        "name": "btanfc:workbench/glowstone_blue",
+        "type": "minecraft:crafting/shaped",
+        "pattern": [
+            "DD ",
+            "DD ",
+            "   "
+        ],
+        "symbols": [
+            {
+                "symbol": "D",
+                "stack": {
+                    "key": "item.btanfc.dust.glowstone.blue",
+                    "amount": 1,
+                    "meta": 0
+                }
+            }
+        ],
+        "result": {
+            "key": "tile.btanfc.glowstone.blue",
+            "amount": 1,
+            "meta": 0
+        },
+        "consumeContainers": false
     }
 ]

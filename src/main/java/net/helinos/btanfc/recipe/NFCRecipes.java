@@ -1,6 +1,8 @@
 package net.helinos.btanfc.recipe;
 
 import net.helinos.btanfc.BTANFC;
+import net.helinos.btanfc.block.NFCBlocks;
+import net.helinos.btanfc.recipe.entry.RecipeEntryCarpentry;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.DataLoader;
 import net.minecraft.core.data.registry.Registries;
@@ -15,6 +17,7 @@ public class NFCRecipes implements RecipeEntrypoint {
     public static NFCRecipeNamespace RECIPE_NAMESPACE = new NFCRecipeNamespace();
     public static RecipeGroup<RecipeEntryCrafting<?,?>> WORKBENCH;
     public static RecipeGroup<RecipeEntryFurnace> FURNACE;
+    public static RecipeGroup<RecipeEntryCarpentry> CARPENTRY;
     
     @Override
     public void onRecipesReady() {
@@ -30,6 +33,7 @@ public class NFCRecipes implements RecipeEntrypoint {
     }
 
     public void load() {
+        new CarpentryRecipes().addRecipes(CARPENTRY);
         DataLoader.loadRecipesFromFile("/assets/btanfc/recipes/workbench.json");
         DataLoader.loadRecipesFromFile("/assets/btanfc/recipes/furnace.json");
     }
@@ -38,11 +42,13 @@ public class NFCRecipes implements RecipeEntrypoint {
         RECIPE_NAMESPACE = new NFCRecipeNamespace();
         WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.workbench)));
         FURNACE = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.furnaceStoneIdle)));
+        CARPENTRY = new RecipeGroup<>(new RecipeSymbol(new ItemStack(NFCBlocks.carpentryWorkstation)));
     }
 
     public void registerNamespaces() {
         RECIPE_NAMESPACE.register("workbench", WORKBENCH);
         RECIPE_NAMESPACE.register("furnace", FURNACE);
+        RECIPE_NAMESPACE.register("carpentry", CARPENTRY);
         Registries.RECIPES.register(BTANFC.MOD_ID, RECIPE_NAMESPACE);
     }
 }

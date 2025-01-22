@@ -5,7 +5,13 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "ChunkDecoratorNetherMixin",
-    "TileEntityFurnaceMixin"
+    "TileEntityFurnaceMixin",
+    "WorldFeatureGlowstoneAMixin",
+    "WorldFeatureGlowstoneBMixin",
+    "EntityPlayerMPMixin",
+    "NetClientHandlerMixin",
+    "RecipeRegistryMixin",
+    "GuiContainerMixin"
   ],
   "client": [],
   "injectors": {

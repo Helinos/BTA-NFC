@@ -14,10 +14,18 @@ tile.btanfc.brick.scorched_sandstone.name=Scorched Sandstone Bricks
 tile.btanfc.slab.brick.scorched_sandstone.name=Scorched Sandstone Brick Slab
 tile.btanfc.stairs.brick.scorched_sandstone.name=Scorched Sandstone Brick Stairs
 
+tile.btanfc.glowstone.blue.name=Blue Glowstone
+
 tile.btanfc.pizza.cooked.name=Pizza
 tile.btanfc.pizza.raw.name=Raw Pizza
+
+tile.btanfc.carpentry_workstation.name=Carpentry Workstation
 
 item.btanfc.food.cheese.name=Cheese
 item.btanfc.food.pizza.cooked.name=Pizza
 item.btanfc.food.pizza.raw.name=Raw Pizza
 item.btanfc.food.egg.cooked.name=Cooked Chicken Egg
+
+item.btanfc.dust.glowstone.blue.name=Blue Glowstone Dust
+
+gui.crafting.label.carpentry_workstation=Carpentry Workstation

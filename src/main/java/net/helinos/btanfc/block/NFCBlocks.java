@@ -4,6 +4,7 @@ import net.helinos.btanfc.BTANFC;
 import net.helinos.btanfc.block.model.BlockModelWindow;
 import net.helinos.btanfc.item.ItemBlockWindow;
 import net.helinos.btanfc.item.NFCItems;
+import net.minecraft.client.render.block.model.BlockModelHorizontalRotation;
 import net.minecraft.client.render.block.model.BlockModelSlab;
 import net.minecraft.client.render.block.model.BlockModelStairs;
 import net.minecraft.core.block.Block;
@@ -40,9 +41,11 @@ public class NFCBlocks {
     public static BlockStairs stairsBrickScorchedSandstone;
     public static BlockPizza pizzaRaw;
     public static BlockPizza pizzaCooked;
+    public static BlockGlowStoneBlue glowstoneBlue;
+    public static BlockCarpentryWorkstation carpentryWorkstation;
 
     public static void init() {
-        BTANFC.LOGGER.info("Initializing Blocks.");
+        BTANFC.LOGGER.info("Initializing blocks.");
 
         window = (BlockGlass) new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.GLASS)
@@ -64,6 +67,8 @@ public class NFCBlocks {
             .setTags(BlockTags.MINEABLE_BY_SHOVEL, BlockTags.GROWS_SUGAR_CANE, BlockTags.GROWS_CACTI, BlockTags.CAVES_CUT_THROUGH, BlockTags.INFINITE_BURN)
             .setTextures("btanfc:block/scorched_sand")
             .build(new BlockScorchedSand("scorched_sand", BTANFC.config.getInt("BlockIDs.scorchedSand")));
+        
+        CreativeHelper.setParent(new ItemStack(scorchedSand, 1, 0), new ItemStack(Block.sand.id, 1, 0, null));
 
         scorchedSandstone = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.STONE)
@@ -74,6 +79,8 @@ public class NFCBlocks {
             .setBottomTexture("btanfc:block/scorched_sandstone_bottom")
             .build(new Block("scorched_sandstone", BTANFC.config.getInt("BlockIDs.scorchedSandstone"), Material.stone));
 
+        CreativeHelper.setParent(new ItemStack(scorchedSandstone, 1, 0), new ItemStack(Block.sandstone.id, 1, 0, null));
+
         slabScorchedSandstone = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.STONE)
             .setHardness(0.8F)
@@ -83,6 +90,8 @@ public class NFCBlocks {
             .setBlockModel(BlockModelSlab::new)
             .setItemBlock(ItemBlockSlab::new)
             .build(new BlockSlab(scorchedSandstone, BTANFC.config.getInt("BlockIDs.slabScorchedSandstone")));
+        
+        CreativeHelper.setParent(new ItemStack(slabScorchedSandstone, 1, 0), new ItemStack(Block.slabSandstone.id, 1, 0, null));
 
         stairsScorchedSandstone = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.STONE)
@@ -93,6 +102,8 @@ public class NFCBlocks {
             .setBlockModel(BlockModelStairs::new)
             .build(new BlockStairs(scorchedSandstone, BTANFC.config.getInt("BlockIDs.stairsScorchedSandstone")));
 
+        CreativeHelper.setParent(new ItemStack(stairsScorchedSandstone, 1, 0), new ItemStack(Block.stairsSandstone.id, 1, 0, null));
+
         brickScorchedSandstone = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.STONE)
             .setHardness(0.8F)
@@ -100,6 +111,8 @@ public class NFCBlocks {
             .setTags(BlockTags.MINEABLE_BY_PICKAXE)
             .setTextures("btanfc:block/scorched_sandstone_bricks")
             .build(new Block("brick.scorched_sandstone", BTANFC.config.getInt("BlockIDs.brickScorchedSandstone"), Material.stone));
+
+        CreativeHelper.setParent(new ItemStack(brickScorchedSandstone, 1, 0), new ItemStack(Block.brickSandstone.id, 1, 0, null));
         
         slabBrickScorchedSandstone = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.STONE)
@@ -112,6 +125,8 @@ public class NFCBlocks {
             .setItemBlock(ItemBlockSlab::new)
             .build(new BlockSlab(brickScorchedSandstone, BTANFC.config.getInt("BlockIDs.slabBrickScorchedSandstone")));
 
+        CreativeHelper.setParent(new ItemStack(slabBrickScorchedSandstone, 1, 0), new ItemStack(Block.slabBrickSandstone.id, 1, 0, null));
+
         stairsBrickScorchedSandstone = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.STONE)
             .setHardness(0.8F)
@@ -121,6 +136,8 @@ public class NFCBlocks {
             .setTags(BlockTags.MINEABLE_BY_PICKAXE)
             .setBlockModel(BlockModelStairs::new)
             .build(new BlockStairs(brickScorchedSandstone, BTANFC.config.getInt("BlockIDs.stairsBrickScorchedSandstone")));
+
+        CreativeHelper.setParent(new ItemStack(stairsBrickScorchedSandstone, 1, 0), new ItemStack(Block.stairsBrickSandstone.id, 1, 0, null));
 
         pizzaRaw = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.CLOTH)
@@ -142,7 +159,30 @@ public class NFCBlocks {
             .setBottomTexture("btanfc:block/pizza_cooked_bottom")
             .build(new BlockPizza("pizza.cooked", BTANFC.config.getInt("BlockIDs.pizzaCooked"), 5, () -> (Item) NFCItems.foodPizzaCooked));
 
+        glowstoneBlue = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.GLASS)
+            .setHardness(0.3F)
+            .setLuminance(15)
+            .setTags(BlockTags.MINEABLE_BY_PICKAXE)
+            .setTextures("btanfc:block/glowstone_blue")
+            .build(new BlockGlowStoneBlue("glowstone.blue", BTANFC.config.getInt("BlockIDs.glowstoneBlue")));
 
-        BTANFC.LOGGER.info("Initialized Blocks.");
+        CreativeHelper.setParent(new ItemStack(glowstoneBlue, 1, 0), new ItemStack(Block.glowstone.id, 1, 0, null));
+
+        carpentryWorkstation = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.WOOD)
+            .setHardness(2.5F)
+            .setVisualUpdateOnMetadata()
+            .setTags(BlockTags.FENCES_CONNECT, BlockTags.MINEABLE_BY_AXE)
+            .setSideTextures("btanfc:block/carpentry_workstation_side")
+            .setNorthTexture("btanfc:block/carpentry_workstation_front")
+            .setTopTexture("btanfc:block/carpentry_workstation_top")
+            .setBottomTexture("btanfc:block/carpentry_workstation_bottom")
+            .setBlockModel(BlockModelHorizontalRotation::new)
+            .build(new BlockCarpentryWorkstation("carpentry_workstation", BTANFC.config.getInt("BlockIDs.carpentryWorkstation")));
+
+        CreativeHelper.setParent(new ItemStack(carpentryWorkstation, 1, 0), new ItemStack(Block.workbench.id, 1, 0, null));
+
+        BTANFC.LOGGER.info("Initialized " + BTANFC.BLOCK_FIELDS.size() + " blocks.");
     }
 }

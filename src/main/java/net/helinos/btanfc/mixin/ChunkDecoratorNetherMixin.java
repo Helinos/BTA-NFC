@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.At;
 
+import net.helinos.btanfc.block.BlockScorchedSand;
 import net.helinos.btanfc.feature.WorldFeatureScorchedSandPatch;
-import net.minecraft.core.block.BlockSand;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.Chunk;
 import net.minecraft.core.world.generate.chunk.perlin.nether.ChunkDecoratorNether;
@@ -30,7 +30,7 @@ public abstract class ChunkDecoratorNetherMixin {
         int rangeY = maxY + 1 - minY;
         Random rand = new Random((long)chunkX * 341873128712L + (long)chunkZ * 132897987541L);  
         
-        BlockSand.fallInstantly = true;
+        BlockScorchedSand.fallInstantly = true;
 
         int xStart = x + rand.nextInt(16);
         int yStart = minY + rand.nextInt(rangeY);
@@ -38,6 +38,6 @@ public abstract class ChunkDecoratorNetherMixin {
 
         new WorldFeatureScorchedSandPatch().generate(this.world, rand, xStart, yStart, zStart);
 
-        BlockSand.fallInstantly = false;
+        BlockScorchedSand.fallInstantly = false;
     }
 }
