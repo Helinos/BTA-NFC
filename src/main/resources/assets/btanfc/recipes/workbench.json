@@ -404,5 +404,46 @@
             "meta": 0
         },
         "consumeContainers": false
+    },
+    {
+        "name": "btanfc:workbench/carpentry_workstation",
+        "type": "minecraft:crafting/shaped",
+        "pattern": [
+            "PPP",
+            "PIP",
+            "CCC"
+        ],
+        "symbols": [
+            {
+                "symbol": "P",
+                "stack": {
+                    "key": "tile.planks.oak",
+                    "amount": 1,
+                    "meta": 0
+                }
+            },
+            {
+                "symbol": "I",
+                "stack": {
+                    "key": "item.ingot.iron",
+                    "amount": 1,
+                    "meta": 0
+                }
+            },
+            {
+                "symbol": "C",
+                "stack": {
+                    "key": "tile.cobble.stone",
+                    "amount": 1,
+                    "meta": 0
+                }
+            }
+        ],
+        "result": {
+            "key": "tile.btanfc.carpentry_workstation",
+            "amount": 1,
+            "meta": 0
+        },
+        "consumeContainers": false
     }
 ]

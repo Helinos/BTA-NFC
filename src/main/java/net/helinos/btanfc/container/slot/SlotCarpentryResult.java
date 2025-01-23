@@ -28,7 +28,7 @@ public class SlotCarpentryResult extends Slot {
         List<RecipeEntryCarpentry> carpentryRecipes = ((IRecipeRegistry) Registries.RECIPES).getAllCarpentryRecipes();
         for (int index = 0; index < carpentryRecipes.size(); ++index) {
             RecipeEntryCarpentry recipe = carpentryRecipes.get(index);
-            if (recipe.matches((InventoryCarpentry) this.inputSlot)) {
+            if (recipe.matches((InventoryCarpentry) this.inputSlot) != null) {
                 ItemStack inputStack = inputSlot.getStackInSlot(0);
                 if (inputStack != null) {
                     inputSlot.decrStackSize(0, 1);

@@ -1,8 +1,8 @@
 package net.helinos.btanfc.block;
 
 import net.helinos.btanfc.BTANFC;
-import net.helinos.btanfc.block.model.BlockModelWindow;
-import net.helinos.btanfc.item.ItemBlockWindow;
+import net.helinos.btanfc.block.model.BlockModelVariants;
+import net.helinos.btanfc.item.ItemBlockVariants;
 import net.helinos.btanfc.item.NFCItems;
 import net.minecraft.client.render.block.model.BlockModelHorizontalRotation;
 import net.minecraft.client.render.block.model.BlockModelSlab;
@@ -21,14 +21,28 @@ import turniplabs.halplibe.helper.BlockBuilder;
 import turniplabs.halplibe.helper.CreativeHelper;
 
 public class NFCBlocks {
-    public static final String[] windowTypes = new String[] {
-            "window",
-            "vertical_double_window",
-            "small_window",
-            "horizontal_double_window",
-            "mini_window",
-            "quadruple_window",
-            "gothic_window"
+    public static final String[] windowVariants = new String[] {
+        "",
+        "double_vertical",
+        "small",
+        "double_horizontal",
+        "mini",
+        "quadruple",
+        "gothic"
+    };
+
+    public static final String[] mudBrickVariants = new String[] {
+        "",
+        "large",
+        "random",
+        "wide",
+    };
+
+    public static final String[] plankVariants = new String[] {
+        "parquet",
+        "smooth",
+        "vertical",
+        "crossed",
     };
 
     public static BlockGlass window;
@@ -43,23 +57,62 @@ public class NFCBlocks {
     public static BlockPizza pizzaCooked;
     public static BlockGlowStoneBlue glowstoneBlue;
     public static BlockCarpentryWorkstation carpentryWorkstation;
+    public static Block brickMud;
+    public static Block brickMudFired;
+    public static Block planksAlternate;
 
     public static void init() {
         BTANFC.LOGGER.info("Initializing blocks.");
 
-        window = (BlockGlass) new BlockBuilder(BTANFC.MOD_ID)
+        window = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.GLASS)
             .setHardness(0.3F)
             .setTags(BlockTags.MINEABLE_BY_PICKAXE, BlockTags.EXTENDS_MOTION_SENSOR_RANGE)
-            .setBlockModel(BlockModelWindow::new)
-            .setItemBlock(ItemBlockWindow::new)
+            .setBlockModel(block -> new BlockModelVariants<BlockGlass>(window, "window", windowVariants))
+            .setItemBlock(block -> new ItemBlockVariants(block, windowVariants))
             .build(new BlockGlass("window", BTANFC.config.getInt("BlockIDs.window"), Material.glass));
 
         // I don't know why but this only works for 2 blocks and then it "[Client-Main/WARN] (halplibe) Could not find parent stack of '1 * tile.btanfc.window:2' in the list! does it exist? adding stack to end of list!"
         CreativeHelper.setParent(new ItemStack(window, 1, 0), new ItemStack(Block.glass.id, 1, 0, null));
-        for (int index = 1; index < windowTypes.length; index++) {
+        for (int index = 1; index < windowVariants.length; index++) {
            CreativeHelper.setParent(new ItemStack(window, 1, index), new ItemStack(window, 1, index - 1));
         }
+
+        brickMud = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.GRAVEL)
+            .setHardness(0.6F)
+            .setTags(BlockTags.MINEABLE_BY_SHOVEL)
+            .setBlockModel(block -> new BlockModelVariants<Block>(brickMud, "mud_bricks", mudBrickVariants))
+            .setItemBlock(block -> new ItemBlockVariants(block, mudBrickVariants))
+            .build(new Block("brick.mud", BTANFC.config.getInt("BlockIDs.brickMud"), Material.dirt));
+
+        CreativeHelper.setParent(new ItemStack(brickMud, 1, 0), new ItemStack(Block.mud.id, 1, 0, null));
+        for (int index = 1; index < mudBrickVariants.length; index++) {
+            CreativeHelper.setParent(new ItemStack(brickMud, 1, index), new ItemStack(brickMud, 1, index - 1));
+        }
+
+        brickMudFired = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.STONE)
+            .setHardness(1.5F)
+            .setTags(BlockTags.MINEABLE_BY_PICKAXE)
+            .setBlockModel(block -> new BlockModelVariants<Block>(brickMudFired, "mud_fired_bricks", mudBrickVariants))
+            .setItemBlock(block -> new ItemBlockVariants(block, mudBrickVariants))
+            .build(new Block("brick.mud.fired", BTANFC.config.getInt("BlockIDs.brickMudFired"), Material.stone));
+
+        CreativeHelper.setParent(new ItemStack(brickMudFired, 1, 0), new ItemStack(Block.mudBaked.id, 1, 0, null));
+        for (int index = 1; index < mudBrickVariants.length; index++) {
+            CreativeHelper.setParent(new ItemStack(brickMudFired, 1, index), new ItemStack(brickMudFired, 1, index - 1));
+        }
+
+        planksAlternate = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(null)
+            .setHardness(2.0F)
+            .setResistance(5.0F)
+            .setVisualUpdateOnMetadata()
+            .setTags(BlockTags.FENCES_CONNECT, BlockTags.MINEABLE_BY_AXE)
+            .setBlockModel(block -> new BlockModelVariants<Block>(planksAlternate, "planks", plankVariants))
+            .setItemBlock(block -> new ItemBlockVariants(block, plankVariants))
+            .build(new Block("planks.alternate", BTANFC.config.getInt("BlockIDs.planksAlternate"), Material.wood));
 
         scorchedSand = (BlockScorchedSand) new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.SAND)

@@ -118,7 +118,7 @@ public class BTANFC implements ModInitializer {
 
 		// No idea if this works or if there's a "proper" way of doing this.
 		BTANFC.LOGGER.info("Adding music.");
-		Minecraft minecraft = Minecraft.getMinecraft(Minecraft.class);
+		Minecraft minecraft = Minecraft.getMinecraft(getClass());
 		for (String musicName : MUSIC_NAMES) {
 			File music;
 			URL resource = getClass().getClassLoader().getResource("nfcmusic/" + musicName + ".ogg");

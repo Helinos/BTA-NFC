@@ -15,16 +15,14 @@ public class BlockGlowStoneBlue extends BlockGlowStone {
    
    @Override
    public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity) {
-      switch (dropCause.ordinal()) {
-         case 3:
-         case 4:
+      switch (dropCause) {
+         case PICK_BLOCK:
+         case SILK_TOUCH:
             return new ItemStack[]{new ItemStack(this)};
-         case 1:
-         case 5:
-         case 6:
-            return null;
-         default:
+         case PROPER_TOOL:
             return new ItemStack[]{new ItemStack(NFCItems.dustGlowstoneBlue, 4)};
+         default:
+               return null;
       }
    }
 }

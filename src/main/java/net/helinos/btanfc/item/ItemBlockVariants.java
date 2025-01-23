@@ -1,15 +1,17 @@
 package net.helinos.btanfc.item;
 
-import net.helinos.btanfc.block.NFCBlocks;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.block.ItemBlock;
 
-public class ItemBlockWindow extends ItemBlock {
-    public ItemBlockWindow(Block block) {
+public class ItemBlockVariants extends ItemBlock {
+    private String[] variantList;
+    
+    public ItemBlockVariants(Block block, String[] variantList) {
         super(block);
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
+        this.variantList = variantList;
     }
 
     @Override
@@ -19,6 +21,6 @@ public class ItemBlockWindow extends ItemBlock {
 
     @Override
     public String getLanguageKey(ItemStack itemstack) {
-        return super.getKey() + "." + NFCBlocks.windowTypes[itemstack.getMetadata() % NFCBlocks.windowTypes.length];
+        return super.getKey() + "." + this.variantList[itemstack.getMetadata() % this.variantList.length];
     }
 }

@@ -38,7 +38,7 @@ public class ContainerCarpentryWorkstation extends Container {
         // Result Slots
         for(int row = 0; row < 3; ++row) {
             for(int column = 0; column < 4; ++column) {
-                this.addSlot(new SlotCarpentryResult(this.inputSlot, this.resultSlots, column + row * 3, 98 + column * 18, 17 + row * 18));
+                this.addSlot(new SlotCarpentryResult(this.inputSlot, this.resultSlots, column + row * 4, 98 + column * 18, 17 + row * 18));
             }
         }
 
@@ -141,7 +141,7 @@ public class ContainerCarpentryWorkstation extends Container {
                 if (carpentCount != null) {
                     List<Integer> resultSlots = this.getTargetSlots(action, slot, target, player);
                     if (resultSlots != null) {
-                        for (int count = 0; count < carpentCount; ++count) {
+                        for (int count = 0; count < carpentCount; count++) {
                             int freeSpace = this.getFreeSpace(itemToCarpent, resultSlots);
                             if (freeSpace >= itemToCarpent.stackSize) {
                                 ItemStack newStack = itemToCarpent.copy();
@@ -152,6 +152,11 @@ public class ContainerCarpentryWorkstation extends Container {
                                 this.mergeItems(newStack, resultSlots);
                                 if (newStack.stackSize > 0) {
                                     this.storeOrDropItem(player, newStack);
+                                }
+
+                                ItemStack inputItem = slot.getStack();
+                                if (inputItem == null) {
+                                    return;
                                 }
                             }
                         }

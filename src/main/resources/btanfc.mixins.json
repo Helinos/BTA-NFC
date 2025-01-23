@@ -11,7 +11,8 @@
     "EntityPlayerMPMixin",
     "NetClientHandlerMixin",
     "RecipeRegistryMixin",
-    "GuiContainerMixin"
+    "GuiContainerMixin",
+    "GuidebookSectionsMixin"
   ],
   "client": [],
   "injectors": {

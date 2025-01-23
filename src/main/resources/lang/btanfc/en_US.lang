@@ -1,10 +1,10 @@
-tile.btanfc.window.window.name=Window
-tile.btanfc.window.vertical_double_window.name=Vertical Double Window
-tile.btanfc.window.small_window.name=Small Window
-tile.btanfc.window.horizontal_double_window.name=Horizontal Double Window
-tile.btanfc.window.mini_window.name=Mini Window
-tile.btanfc.window.quadruple_window.name=Quadruple Window
-tile.btanfc.window.gothic_window.name=Gothic Window
+tile.btanfc.window..name=Window
+tile.btanfc.window.double_vertical.name=Vertical Double Window
+tile.btanfc.window.small.name=Small Window
+tile.btanfc.window.double_horizontal.name=Horizontal Double Window
+tile.btanfc.window.mini.name=Mini Window
+tile.btanfc.window.quadruple.name=Quadruple Window
+tile.btanfc.window.gothic.name=Gothic Window
 
 tile.btanfc.scorched_sand.name=Scorched Sand
 tile.btanfc.scorched_sandstone.name=Scorched Sandstone
@@ -21,6 +21,19 @@ tile.btanfc.pizza.raw.name=Raw Pizza
 
 tile.btanfc.carpentry_workstation.name=Carpentry Workstation
 
+tile.btanfc.brick.mud..name=Mud Bricks
+tile.btanfc.brick.mud.large.name=Large Mud Bricks
+tile.btanfc.brick.mud.random.name=Random Mud Bricks
+tile.btanfc.brick.mud.wide.name=Wide Mud Bricks
+tile.btanfc.brick.mud.fired..name=Baked Mud Bricks
+tile.btanfc.brick.mud.fired.large.name=Large Baked Mud Bricks
+tile.btanfc.brick.mud.fired.random.name=Random Baked Mud Bricks
+tile.btanfc.brick.mud.fired.wide.name=Wide Baked Mud Bricks
+tile.btanfc.planks.alternate.parquet.name=Parquet Planks
+tile.btanfc.planks.alternate.smooth.name=Smooth Planks
+tile.btanfc.planks.alternate.vertical.name=Vertical Planks
+tile.btanfc.planks.alternate.crossed.name=Crossed Planks
+
 item.btanfc.food.cheese.name=Cheese
 item.btanfc.food.pizza.cooked.name=Pizza
 item.btanfc.food.pizza.raw.name=Raw Pizza
@@ -29,3 +42,5 @@ item.btanfc.food.egg.cooked.name=Cooked Chicken Egg
 item.btanfc.dust.glowstone.blue.name=Blue Glowstone Dust
 
 gui.crafting.label.carpentry_workstation=Carpentry Workstation
+
+guidebook.section.carpentry=Carpentry

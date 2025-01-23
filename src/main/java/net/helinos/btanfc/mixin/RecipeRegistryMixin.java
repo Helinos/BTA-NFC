@@ -2,7 +2,6 @@ package net.helinos.btanfc.mixin;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,21 +22,12 @@ public abstract class RecipeRegistryMixin extends Registry<RecipeNamespace> impl
     @Override
     public List<RecipeEntryCarpentry> getAllCarpentryRecipes() {
         ArrayList<RecipeEntryCarpentry> recipes = new ArrayList();
-        Iterator recipeIterator = this.iterator();
 
-        while(recipeIterator.hasNext()) {
-            RecipeNamespace recipeNamespace = (RecipeNamespace) recipeIterator.next();
-            Iterator namespaceIterator = recipeNamespace.iterator();
-
-            while (namespaceIterator.hasNext()) {
-                RecipeGroup recipeGroup = (RecipeGroup) namespaceIterator.next();
-                Iterator groupIterator = recipeGroup.iterator();
-
-                while(groupIterator.hasNext()) {
-                    RecipeEntryBase<?, ?, ?> recipeEntry = (RecipeEntryBase) groupIterator.next();
-                    if (recipeEntry instanceof RecipeEntryCarpentry) {
+        for(RecipeNamespace recipeNamespace : this) {
+            for(RecipeGroup<? extends RecipeEntryBase<?, ?, ?>> recipeGroup : recipeNamespace) {
+                for (RecipeEntryBase<?, ?, ?> recipeEntry : recipeGroup) {
+                    if (recipeEntry instanceof RecipeEntryCarpentry)
                         recipes.add((RecipeEntryCarpentry) recipeEntry);
-                    }
                 }
             }
         }
@@ -49,7 +39,8 @@ public abstract class RecipeRegistryMixin extends Registry<RecipeNamespace> impl
     public ArrayList<ItemStack> findMatchingRecipe(InventoryCarpentry inventoryCarpentry) {
         for(int index = 0; index < this.getAllCarpentryRecipes().size(); ++index) {
             RecipeEntryCarpentry recipe = this.getAllCarpentryRecipes().get(index);
-            if (recipe.matches(inventoryCarpentry)) {
+            ArrayList<ItemStack> results = recipe.matches(inventoryCarpentry);
+            if (results != null) {
                 return recipe.getResult(inventoryCarpentry);
             }
         }
