@@ -23,6 +23,7 @@ public class CarpentryRecipes {
                 }
             )
         );
+
         group.register(
             "fired_mud_bricks", 
             new RecipeEntryCarpentry(
@@ -37,6 +38,7 @@ public class CarpentryRecipes {
                 }
             )
         );
+
         group.register(
             "planks", 
             new RecipeEntryCarpentry(
@@ -48,6 +50,23 @@ public class CarpentryRecipes {
                     new ItemStack(NFCBlocks.planksAlternate, 1, 1),
                     new ItemStack(NFCBlocks.planksAlternate, 1, 2),
                     new ItemStack(NFCBlocks.planksAlternate, 1, 3)
+                }
+            )
+        );
+
+        group.register(
+            "smooth_stone", 
+            new RecipeEntryCarpentry(
+                new RecipeSymbol[] {
+                    new RecipeSymbol(Block.stone.getDefaultStack())
+                },
+                new ItemStack[] {
+                    new ItemStack(NFCBlocks.stoneSmooth, 1, 0),
+                    new ItemStack(NFCBlocks.stoneSmooth, 1, 1),
+                    new ItemStack(NFCBlocks.stoneSmooth, 1, 2),
+                    new ItemStack(NFCBlocks.stoneSmooth, 1, 3),
+                    new ItemStack(Block.brickStone),
+                    new ItemStack(NFCBlocks.stoneSmooth, 1, 4)
                 }
             )
         );

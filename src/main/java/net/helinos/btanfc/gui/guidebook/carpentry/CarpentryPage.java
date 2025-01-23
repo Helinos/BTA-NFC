@@ -44,14 +44,22 @@ public class CarpentryPage extends RecipePage<RecipeEntryCarpentry> {
             ItemStack[] outputs = recipe.getOutput();
             ArrayList<SlotGuidebook> recipeSlots = new ArrayList<>();
             int halfRecipeWidth = (ARROW_WIDTH + SLOT_SIDE_LENGTH + SLOT_SIDE_LENGTH * (outputs.length > 4 ? 4 : outputs.length)) / 2;
-            int halfRecipeHeight = (SLOT_SIDE_LENGTH * (outputs.length / 4)) / 2;
+            int halfRecipeHeight = SLOT_SIDE_LENGTH * (int) Math.ceil(outputs.length / 4.0) / 2;
             int xPosition = HALF_PAGE_WIDTH + halfRecipeWidth;
             int yPosition = yOffset - halfRecipeHeight;
 
-            for (int row = 0; row < (outputs.length / 4); row++) {
+            for (int row = 0; row < (int) Math.ceil(outputs.length / 4.0); row++) {
                 xPosition -= SLOT_SIDE_LENGTH * (outputs.length > 4 ? 4 : outputs.length);
                 for (int column = 0; column < (outputs.length > 4 ? 4 : outputs.length); column++) {
-                    recipeSlots.add(new SlotGuidebook(column + row * 4, xPosition, yPosition, new RecipeSymbol(recipe.getOutput()[column + row * 4]), false, recipe).setAsOutput());
+                    int index = column + row * 4;
+                    ItemStack[] output = recipe.getOutput();
+
+                    if (index < output.length) {
+                        recipeSlots.add(new SlotGuidebook(column + row * 4, xPosition, yPosition, new RecipeSymbol(output[index]), false, recipe).setAsOutput());
+                    } else {
+                        recipeSlots.add(new SlotGuidebook(column + row * 4, xPosition, yPosition, null, false, recipe).setAsOutput());
+                    }
+                    
                     xPosition += SLOT_SIDE_LENGTH;
                 }
                 yPosition += SLOT_SIDE_LENGTH;
@@ -116,7 +124,7 @@ public class CarpentryPage extends RecipePage<RecipeEntryCarpentry> {
         }
    }
 
-   @Override
+    @Override
     protected void renderOverlay(RenderEngine renderEngine, FontRenderer fontRenderer, int x, int y, int mouseX, int mouseY, float partialTicks) {
         super.renderOverlay(renderEngine, fontRenderer, x, y, mouseX, mouseY, partialTicks);
         SlotGuidebook mouseOverSlot = null;

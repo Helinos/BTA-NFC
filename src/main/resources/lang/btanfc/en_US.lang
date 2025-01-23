@@ -33,6 +33,11 @@ tile.btanfc.planks.alternate.parquet.name=Parquet Planks
 tile.btanfc.planks.alternate.smooth.name=Smooth Planks
 tile.btanfc.planks.alternate.vertical.name=Vertical Planks
 tile.btanfc.planks.alternate.crossed.name=Crossed Planks
+tile.btanfc.stone.smooth..name=Smooth Stone
+tile.btanfc.stone.smooth.bricks_t_cut.name=T-Cut Stone Bricks
+tile.btanfc.stone.smooth.cross_cut.name=Cross-Cut Stone
+tile.btanfc.stone.smooth.side_cut.name=Side-Cut Stone
+tile.btanfc.stone.smooth.upright_cut.name=Upright-Cut Stone
 
 item.btanfc.food.cheese.name=Cheese
 item.btanfc.food.pizza.cooked.name=Pizza

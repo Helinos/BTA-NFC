@@ -45,6 +45,14 @@ public class NFCBlocks {
         "crossed",
     };
 
+    public static final String[] stoneSmoothVariants = new String[] {
+        "",
+        "cross_cut",
+        "side_cut",
+        "upright_cut",
+        "bricks_t_cut"
+    };
+
     public static BlockGlass window;
     public static BlockScorchedSand scorchedSand;
     public static Block scorchedSandstone;
@@ -60,6 +68,7 @@ public class NFCBlocks {
     public static Block brickMud;
     public static Block brickMudFired;
     public static Block planksAlternate;
+    public static Block stoneSmooth;
 
     public static void init() {
         BTANFC.LOGGER.info("Initializing blocks.");
@@ -105,7 +114,7 @@ public class NFCBlocks {
         }
 
         planksAlternate = new BlockBuilder(BTANFC.MOD_ID)
-            .setBlockSound(null)
+            .setBlockSound(BlockSounds.WOOD)
             .setHardness(2.0F)
             .setResistance(5.0F)
             .setVisualUpdateOnMetadata()
@@ -113,6 +122,25 @@ public class NFCBlocks {
             .setBlockModel(block -> new BlockModelVariants<Block>(planksAlternate, "planks", plankVariants))
             .setItemBlock(block -> new ItemBlockVariants(block, plankVariants))
             .build(new Block("planks.alternate", BTANFC.config.getInt("BlockIDs.planksAlternate"), Material.wood));
+
+        CreativeHelper.setParent(new ItemStack(planksAlternate, 1, 0), new ItemStack(Block.planksOak.id, 1, 0, null));
+        for (int index = 1; index < plankVariants.length; index++) {
+            CreativeHelper.setParent(new ItemStack(planksAlternate, 1, index), new ItemStack(planksAlternate, 1, index - 1));
+        }
+
+        stoneSmooth = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.STONE)
+            .setHardness(2.0F)
+            .setResistance(10.0F)
+            .setTags(BlockTags.MINEABLE_BY_PICKAXE)
+            .setBlockModel(block -> new BlockModelVariants<Block>(stoneSmooth, "stone_smooth", stoneSmoothVariants))
+            .setItemBlock(block -> new ItemBlockVariants(block, stoneSmoothVariants))
+            .build(new Block("stone.smooth", BTANFC.config.getInt("BlockIDs.stoneSmooth"), Material.stone));
+
+        //CreativeHelper.setParent(new ItemStack(stoneSmooth, 1, 0), new ItemStack(Block.stonePolished.id, 1, 0, null));
+        for (int index = 1; index < stoneSmoothVariants.length; index++) {
+            CreativeHelper.setParent(new ItemStack(stoneSmooth, 1, index), new ItemStack(stoneSmooth, 1, index - 1));
+        }
 
         scorchedSand = (BlockScorchedSand) new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.SAND)
