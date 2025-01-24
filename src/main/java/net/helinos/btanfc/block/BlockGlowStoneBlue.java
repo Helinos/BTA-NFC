@@ -9,20 +9,20 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 
 public class BlockGlowStoneBlue extends BlockGlowStone {
-   public BlockGlowStoneBlue(String key, int id) {
-      super(key, id, Material.stone);
-   }
+    public BlockGlowStoneBlue(String key, int id) {
+        super(key, id, Material.stone);
+    }
    
-   @Override
-   public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity) {
-      switch (dropCause) {
-         case PICK_BLOCK:
-         case SILK_TOUCH:
-            return new ItemStack[]{new ItemStack(this)};
-         case PROPER_TOOL:
-            return new ItemStack[]{new ItemStack(NFCItems.dustGlowstoneBlue, 4)};
-         default:
-               return null;
-      }
-   }
+    @Override
+    public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity) {
+        switch (dropCause) {
+            case PICK_BLOCK:
+            case SILK_TOUCH:
+                return new ItemStack[]{new ItemStack(this)};
+            case PROPER_TOOL:
+                return new ItemStack[]{new ItemStack(NFCItems.dustGlowstoneBlue, 4)};
+            default:
+                   return null;
+        }
+    }
 }

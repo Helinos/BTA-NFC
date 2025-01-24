@@ -29,7 +29,6 @@ public class RecipeEntryCarpentry extends RecipeEntryBase<RecipeSymbol[], ItemSt
 
         ItemStack inputItem = inputInventory.getStackInSlot(0);
 
-
         for (RecipeSymbol symbol : symbols) {
             if (inputItem == null || symbol == null) {
                 continue;
@@ -47,15 +46,15 @@ public class RecipeEntryCarpentry extends RecipeEntryBase<RecipeSymbol[], ItemSt
 
     public ArrayList<ItemStack> getResult(InventoryCarpentry inventoryCarpentry) {
         ArrayList<ItemStack> results = new ArrayList<ItemStack>();
-        ItemStack input = inventoryCarpentry.getStackInSlot(0).copy();
+        ItemStack input = inventoryCarpentry.getStackInSlot(0);
 
-        for (ItemStack itemStack : this.getOutput()) {    
+        for (ItemStack itemStack : this.getOutput()) {
             if (input.itemID == itemStack.itemID && input.getMetadata() == itemStack.getMetadata()) {
-                results.add(this.getInput()[0].getStack());
+                results.add(this.getInput()[0].getStack().copy());
             }
         }
 
-        for (ItemStack itemStack : this.getOutput()) {    
+        for (ItemStack itemStack : this.getOutput()) {
             if (input.itemID != itemStack.itemID || input.getMetadata() != itemStack.getMetadata()) {
                 results.add(itemStack.copy());
             }

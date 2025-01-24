@@ -12,7 +12,8 @@
     "NetClientHandlerMixin",
     "RecipeRegistryMixin",
     "GuiContainerMixin",
-    "GuidebookSectionsMixin"
+    "GuidebookSectionsMixin",
+    "ChunkDecoratorOverworldMixin"
   ],
   "client": [],
   "injectors": {

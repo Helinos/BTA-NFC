@@ -39,7 +39,8 @@ public class BTANFC implements ModInitializer {
 	public static final List<Field> BLOCK_FIELDS = Arrays.stream(NFCBlocks.class.getDeclaredFields()).filter((field) -> Block.class.isAssignableFrom(field.getType())).collect(Collectors.toList());
 	public static final List<Field> ITEM_FIELDS = Arrays.stream(NFCItems.class.getDeclaredFields()).filter((field) -> Item.class.isAssignableFrom(field.getType())).collect(Collectors.toList());
 	
-	public static final int BLUE_GLOWSTONE_CHANCE = 64;
+	public static final int BLUE_GLOWSTONE_CHANCE_1 = 125;
+	public static final int BLUE_GLOWSTONE_CHANCE_2 = 150;
 
 	static {
 		config = new TomlConfigHandler(MOD_ID, new Toml("BTA + NFC configuration file."), false);

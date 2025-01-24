@@ -10,6 +10,7 @@ import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryTrommel;
 import net.minecraft.core.item.ItemStack;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 
@@ -17,6 +18,7 @@ public class NFCRecipes implements RecipeEntrypoint {
     public static NFCRecipeNamespace RECIPE_NAMESPACE = new NFCRecipeNamespace();
     public static RecipeGroup<RecipeEntryCrafting<?,?>> WORKBENCH;
     public static RecipeGroup<RecipeEntryFurnace> FURNACE;
+    public static RecipeGroup<RecipeEntryTrommel> TROMMEL;
     public static RecipeGroup<RecipeEntryCarpentry> CARPENTRY;
     
     @Override
@@ -33,15 +35,17 @@ public class NFCRecipes implements RecipeEntrypoint {
     }
 
     public void load() {
-        new CarpentryRecipes().addRecipes(CARPENTRY);
         DataLoader.loadRecipesFromFile("/assets/btanfc/recipes/workbench.json");
         DataLoader.loadRecipesFromFile("/assets/btanfc/recipes/furnace.json");
+        DataLoader.loadRecipesFromFile("/assets/btanfc/recipes/trommel.json");
+        new CarpentryRecipes().addRecipes(CARPENTRY);
     }
 
     public void resetGroups() {
         RECIPE_NAMESPACE = new NFCRecipeNamespace();
         WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.workbench)));
         FURNACE = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.furnaceStoneIdle)));
+        TROMMEL = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.trommelActive)));
         CARPENTRY = new RecipeGroup<>(new RecipeSymbol(new ItemStack(NFCBlocks.carpentryWorkstation)));
     }
 
@@ -49,6 +53,7 @@ public class NFCRecipes implements RecipeEntrypoint {
         RECIPE_NAMESPACE.register("workbench", WORKBENCH);
         RECIPE_NAMESPACE.register("furnace", FURNACE);
         RECIPE_NAMESPACE.register("carpentry", CARPENTRY);
+        RECIPE_NAMESPACE.register("trommel", TROMMEL);
         Registries.RECIPES.register(BTANFC.MOD_ID, RECIPE_NAMESPACE);
     }
 }

@@ -36,8 +36,12 @@ tile.btanfc.planks.alternate.crossed.name=Crossed Planks
 tile.btanfc.stone.smooth..name=Smooth Stone
 tile.btanfc.stone.smooth.bricks_t_cut.name=T-Cut Stone Bricks
 tile.btanfc.stone.smooth.cross_cut.name=Cross-Cut Stone
-tile.btanfc.stone.smooth.side_cut.name=Side-Cut Stone
-tile.btanfc.stone.smooth.upright_cut.name=Upright-Cut Stone
+tile.btanfc.stone.smooth.aa.side_cut.name=Side-Cut Stone
+tile.btanfc.stone.smooth.aa.upright_cut.name=Upright-Cut Stone
+tile.btanfc.pebble..name=Pebble Block
+tile.btanfc.pebble.small.name=Small Pebble Block
+tile.btanfc.pebble.medium.name=Medium Pebble Block
+tile.btanfc.pebble.large.name=Large Pebble Block
 
 item.btanfc.food.cheese.name=Cheese
 item.btanfc.food.pizza.cooked.name=Pizza

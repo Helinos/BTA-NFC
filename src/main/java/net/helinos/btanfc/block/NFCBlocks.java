@@ -1,6 +1,7 @@
 package net.helinos.btanfc.block;
 
 import net.helinos.btanfc.BTANFC;
+import net.helinos.btanfc.block.model.BlockModelAxisAlignedVariants;
 import net.helinos.btanfc.block.model.BlockModelVariants;
 import net.helinos.btanfc.item.ItemBlockVariants;
 import net.helinos.btanfc.item.NFCItems;
@@ -48,9 +49,34 @@ public class NFCBlocks {
     public static final String[] stoneSmoothVariants = new String[] {
         "",
         "cross_cut",
+        "bricks_t_cut"
+    };
+
+    public static final String[] stoneSmoothAAVariants = new String[] {
         "side_cut",
         "upright_cut",
-        "bricks_t_cut"
+    };
+
+    public static final String[] laminatedWoodVariants = new String[] {
+        "bordered",
+        "smooth",
+    };
+
+    public static final String[] laminatedWoodAAVariants = new String[] {
+        "horizontal",
+        "vertical",
+    };
+
+    public static final String[] logVariants = new String[] {
+        "rounded",
+        "small",
+    };
+
+    public static final String[] pebbleVariants = new String[] {
+        "",
+        "small",
+        "medium",
+        "large"
     };
 
     public static BlockGlass window;
@@ -65,14 +91,71 @@ public class NFCBlocks {
     public static BlockPizza pizzaCooked;
     public static BlockGlowStoneBlue glowstoneBlue;
     public static BlockCarpentryWorkstation carpentryWorkstation;
-    public static Block brickMud;
-    public static Block brickMudFired;
-    public static Block planksAlternate;
-    public static Block stoneSmooth;
+    public static BlockVariants brickMud;
+    public static BlockVariants brickMudFired;
+    public static BlockVariants planksAlternate;
+    public static BlockVariants stoneSmooth;
+    public static BlockAxisAlignedVariants stoneSmoothAA;
+    public static BlockVariants laminatedWood;
+    public static BlockAxisAlignedVariants laminatedWoodAA;
+    public static BlockAxisAlignedVariants logAlternate;
+    public static BlockPebble pebble;
 
     public static void init() {
         BTANFC.LOGGER.info("Initializing blocks.");
 
+        pebble = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.GRAVEL)
+            .setHardness(3.0F)
+            .setResistance(3.0F)
+            .setBlockModel(block -> new BlockModelVariants<>(pebble, "pebble", pebbleVariants))
+            .setItemBlock(block -> new ItemBlockVariants(block, pebbleVariants))
+            .build(new BlockPebble("pebble", BTANFC.config.getInt("BlockIDs.pebble")));
+
+        CreativeHelper.setParent(new ItemStack(pebble, 1, 0), new ItemStack(Block.gravel.id, 1, 0, null));
+        for (int index = 1; index < pebbleVariants.length; index++) {
+            CreativeHelper.setParent(new ItemStack(pebble, 1, index), new ItemStack(pebble, 1, index - 1));
+        }
+
+        laminatedWood = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.WOOD)
+            .setHardness(2.0F)
+            .setTags(BlockTags.MINEABLE_BY_PICKAXE)
+            .setBlockModel(block -> new BlockModelVariants<Block>(laminatedWood, "laminated_wood", laminatedWoodVariants))
+            .setItemBlock(block -> new ItemBlockVariants(block, laminatedWoodVariants))
+            .build(new BlockVariants("laminated_wood", BTANFC.config.getInt("BlockIDs.laminatedWood"), Material.wood));
+
+        laminatedWoodAA = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.WOOD)
+            .setHardness(2.0F)
+            .setTags(BlockTags.MINEABLE_BY_PICKAXE)
+            .setBlockModel(block -> new BlockModelAxisAlignedVariants<Block>(laminatedWoodAA, "laminated_wood_directional", laminatedWoodAAVariants))
+            .setItemBlock(block -> new ItemBlockVariants(block, laminatedWoodAAVariants))
+            .build(new BlockAxisAlignedVariants("laminated_wood.aa", BTANFC.config.getInt("BlockIDs.laminatedWoodAA"), Material.wood));
+
+        logAlternate = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.STONE)
+            .setHardness(2.0F)
+            .setResistance(10.0F)
+            .setVisualUpdateOnMetadata()
+            .setTags(BlockTags.MINEABLE_BY_PICKAXE)
+            .setBlockModel(block -> new BlockModelAxisAlignedVariants<Block>(logAlternate, "log", logVariants))
+            .setItemBlock(block -> new ItemBlockVariants(block, logVariants))
+            .build(new BlockAxisAlignedVariants("log.alternate", BTANFC.config.getInt("BlockIDs.logAlternate"), Material.wood));
+
+        CreativeHelper.setParent(new ItemStack(logAlternate, 1, 0), new ItemStack(Block.logOak.id, 1, 0, null));
+        for (int index = 1; index < logVariants.length; index++) {
+            CreativeHelper.setParent(new ItemStack(logAlternate, 1, index), new ItemStack(logAlternate, 1, index - 1));
+        }
+        CreativeHelper.setParent(new ItemStack(laminatedWood, 1, 0), new ItemStack(logAlternate, 1, logVariants.length - 1, null));
+        for (int index = 1; index < laminatedWoodVariants.length; index++) {
+            CreativeHelper.setParent(new ItemStack(laminatedWood, 1, index), new ItemStack(laminatedWood, 1, index - 1));
+        }
+        CreativeHelper.setParent(new ItemStack(laminatedWoodAA, 1, 0), new ItemStack(laminatedWood, 1, laminatedWoodVariants.length - 1, null));
+        for (int index = 1; index < laminatedWoodAAVariants.length; index++) {
+            CreativeHelper.setParent(new ItemStack(laminatedWoodAA, 1, index), new ItemStack(laminatedWoodAA, 1, index - 1));
+        }
+        
         window = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.GLASS)
             .setHardness(0.3F)
@@ -93,7 +176,7 @@ public class NFCBlocks {
             .setTags(BlockTags.MINEABLE_BY_SHOVEL)
             .setBlockModel(block -> new BlockModelVariants<Block>(brickMud, "mud_bricks", mudBrickVariants))
             .setItemBlock(block -> new ItemBlockVariants(block, mudBrickVariants))
-            .build(new Block("brick.mud", BTANFC.config.getInt("BlockIDs.brickMud"), Material.dirt));
+            .build(new BlockVariants("brick.mud", BTANFC.config.getInt("BlockIDs.brickMud"), Material.dirt));
 
         CreativeHelper.setParent(new ItemStack(brickMud, 1, 0), new ItemStack(Block.mud.id, 1, 0, null));
         for (int index = 1; index < mudBrickVariants.length; index++) {
@@ -106,7 +189,7 @@ public class NFCBlocks {
             .setTags(BlockTags.MINEABLE_BY_PICKAXE)
             .setBlockModel(block -> new BlockModelVariants<Block>(brickMudFired, "mud_fired_bricks", mudBrickVariants))
             .setItemBlock(block -> new ItemBlockVariants(block, mudBrickVariants))
-            .build(new Block("brick.mud.fired", BTANFC.config.getInt("BlockIDs.brickMudFired"), Material.stone));
+            .build(new BlockVariants("brick.mud.fired", BTANFC.config.getInt("BlockIDs.brickMudFired"), Material.stone));
 
         CreativeHelper.setParent(new ItemStack(brickMudFired, 1, 0), new ItemStack(Block.mudBaked.id, 1, 0, null));
         for (int index = 1; index < mudBrickVariants.length; index++) {
@@ -121,7 +204,7 @@ public class NFCBlocks {
             .setTags(BlockTags.FENCES_CONNECT, BlockTags.MINEABLE_BY_AXE)
             .setBlockModel(block -> new BlockModelVariants<Block>(planksAlternate, "planks", plankVariants))
             .setItemBlock(block -> new ItemBlockVariants(block, plankVariants))
-            .build(new Block("planks.alternate", BTANFC.config.getInt("BlockIDs.planksAlternate"), Material.wood));
+            .build(new BlockVariants("planks.alternate", BTANFC.config.getInt("BlockIDs.planksAlternate"), Material.wood));
 
         CreativeHelper.setParent(new ItemStack(planksAlternate, 1, 0), new ItemStack(Block.planksOak.id, 1, 0, null));
         for (int index = 1; index < plankVariants.length; index++) {
@@ -135,11 +218,25 @@ public class NFCBlocks {
             .setTags(BlockTags.MINEABLE_BY_PICKAXE)
             .setBlockModel(block -> new BlockModelVariants<Block>(stoneSmooth, "stone_smooth", stoneSmoothVariants))
             .setItemBlock(block -> new ItemBlockVariants(block, stoneSmoothVariants))
-            .build(new Block("stone.smooth", BTANFC.config.getInt("BlockIDs.stoneSmooth"), Material.stone));
+            .build(new BlockVariants("stone.smooth", BTANFC.config.getInt("BlockIDs.stoneSmooth"), Material.stone));
+
+        stoneSmoothAA = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.STONE)
+            .setHardness(2.0F)
+            .setResistance(10.0F)
+            .setVisualUpdateOnMetadata()
+            .setTags(BlockTags.MINEABLE_BY_PICKAXE)
+            .setBlockModel(block -> new BlockModelAxisAlignedVariants<Block>(stoneSmoothAA, "stone_smooth", stoneSmoothAAVariants))
+            .setItemBlock(block -> new ItemBlockVariants(block, stoneSmoothAAVariants))
+            .build(new BlockAxisAlignedVariants("stone.smooth.aa", BTANFC.config.getInt("BlockIDs.stoneSmoothAA"), Material.stone));
 
         //CreativeHelper.setParent(new ItemStack(stoneSmooth, 1, 0), new ItemStack(Block.stonePolished.id, 1, 0, null));
         for (int index = 1; index < stoneSmoothVariants.length; index++) {
             CreativeHelper.setParent(new ItemStack(stoneSmooth, 1, index), new ItemStack(stoneSmooth, 1, index - 1));
+        }
+        CreativeHelper.setParent(new ItemStack(stoneSmoothAA, 1, 0), new ItemStack(stoneSmooth, 1, stoneSmoothVariants.length - 1, null));
+        for (int index = 1; index < stoneSmoothAAVariants.length; index++) {
+            CreativeHelper.setParent(new ItemStack(stoneSmoothAA, 1, index), new ItemStack(stoneSmoothAA, 1, index - 1));
         }
 
         scorchedSand = (BlockScorchedSand) new BlockBuilder(BTANFC.MOD_ID)

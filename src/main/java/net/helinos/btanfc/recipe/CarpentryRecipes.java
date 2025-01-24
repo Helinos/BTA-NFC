@@ -63,10 +63,41 @@ public class CarpentryRecipes {
                 new ItemStack[] {
                     new ItemStack(NFCBlocks.stoneSmooth, 1, 0),
                     new ItemStack(NFCBlocks.stoneSmooth, 1, 1),
-                    new ItemStack(NFCBlocks.stoneSmooth, 1, 2),
-                    new ItemStack(NFCBlocks.stoneSmooth, 1, 3),
+                    new ItemStack(NFCBlocks.stoneSmoothAA, 1, 0),
+                    new ItemStack(NFCBlocks.stoneSmoothAA, 1, 1),
                     new ItemStack(Block.brickStone),
-                    new ItemStack(NFCBlocks.stoneSmooth, 1, 4)
+                    new ItemStack(NFCBlocks.stoneSmooth, 1, 2)
+                }
+            )
+        );
+
+        group.register(
+            "log", 
+            new RecipeEntryCarpentry(
+                new RecipeSymbol[] {
+                    new RecipeSymbol(Block.logOak.getDefaultStack())
+                },
+                new ItemStack[] {
+                    new ItemStack(NFCBlocks.logAlternate, 1, 0),
+                    new ItemStack(NFCBlocks.logAlternate, 1, 1),
+                    new ItemStack(NFCBlocks.laminatedWood, 2, 0),
+                    new ItemStack(NFCBlocks.laminatedWood, 2, 1),
+                    new ItemStack(NFCBlocks.laminatedWood, 2, 2),
+                    new ItemStack(NFCBlocks.laminatedWood, 2, 3)
+                }
+            )
+        );
+
+        group.register(
+            "pebble", 
+            new RecipeEntryCarpentry(
+                new RecipeSymbol[] {
+                    new RecipeSymbol(new ItemStack(NFCBlocks.pebble, 1, 0))
+                },
+                new ItemStack[] {
+                    new ItemStack(NFCBlocks.pebble, 1, 1),
+                    new ItemStack(NFCBlocks.pebble, 1, 2),
+                    new ItemStack(NFCBlocks.pebble, 1, 3),
                 }
             )
         );

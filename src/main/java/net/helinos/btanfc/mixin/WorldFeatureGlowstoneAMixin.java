@@ -22,7 +22,7 @@ public abstract class WorldFeatureGlowstoneAMixin {
     
     @Inject(method = "generate", at = @At("Head"))
     private void rng(World world, Random random, int x, int y, int z, CallbackInfoReturnable<?> callbackInfoReturnable) {
-        rng = random.nextInt(BTANFC.BLUE_GLOWSTONE_CHANCE);
+        rng = random.nextInt(BTANFC.BLUE_GLOWSTONE_CHANCE_1);
     }
 
     @ModifyArg(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/World;setBlockWithNotify(IIII)Z", ordinal = 0), index = 3)

@@ -23,7 +23,6 @@ public class BlockModelVariants<T extends Block> extends BlockModelStandard<T> {
                 return TextureRegistry.getTexture("btanfc:block/" + texturePrefix + underscore + name);
             }).collect(Collectors.toList())
             .toArray(new IconCoordinate[variantList.length]);
-        
     }
 
     public IconCoordinate getBlockTextureFromSideAndMetadata(Side side, int meta) {

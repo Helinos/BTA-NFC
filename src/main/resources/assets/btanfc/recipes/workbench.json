@@ -445,5 +445,30 @@
             "meta": 0
         },
         "consumeContainers": false
+    },
+    {
+        "name": "btanfc:workbench/pebble_block",
+        "type": "minecraft:crafting/shaped",
+        "pattern": [
+            "PP ",
+            "PP ",
+            "   "
+        ],
+        "symbols": [
+            {
+                "symbol": "P",
+                "stack": {
+                    "key": "item.ammo.pebble",
+                    "amount": 1,
+                    "meta": 0
+                }
+            }
+        ],
+        "result": {
+            "key": "tile.btanfc.pebble",
+            "amount": 1,
+            "meta": 0
+        },
+        "consumeContainers": false
     }
 ]
