@@ -82,8 +82,8 @@ public class CarpentryRecipes {
                     new ItemStack(NFCBlocks.logAlternate, 1, 1),
                     new ItemStack(NFCBlocks.laminatedWood, 2, 0),
                     new ItemStack(NFCBlocks.laminatedWood, 2, 1),
-                    new ItemStack(NFCBlocks.laminatedWood, 2, 2),
-                    new ItemStack(NFCBlocks.laminatedWood, 2, 3)
+                    new ItemStack(NFCBlocks.laminatedWoodAA, 2, 0),
+                    new ItemStack(NFCBlocks.laminatedWoodAA, 2, 1)
                 }
             )
         );

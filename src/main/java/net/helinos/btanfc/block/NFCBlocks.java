@@ -3,6 +3,8 @@ package net.helinos.btanfc.block;
 import net.helinos.btanfc.BTANFC;
 import net.helinos.btanfc.block.model.BlockModelAxisAlignedVariants;
 import net.helinos.btanfc.block.model.BlockModelVariants;
+import net.helinos.btanfc.block.model.BlockModelVariantsPainted;
+import net.helinos.btanfc.item.ItemBlockVariantsPainted;
 import net.helinos.btanfc.item.ItemBlockVariants;
 import net.helinos.btanfc.item.NFCItems;
 import net.minecraft.client.render.block.model.BlockModelCrossedSquares;
@@ -176,7 +178,7 @@ public class NFCBlocks {
             .build(new BlockAxisAlignedVariants("laminated_wood.aa", BTANFC.config.getInt("BlockIDs.laminatedWoodAA"), Material.wood));
 
         logAlternate = new BlockBuilder(BTANFC.MOD_ID)
-            .setBlockSound(BlockSounds.STONE)
+            .setBlockSound(BlockSounds.WOOD)
             .setHardness(2.0F)
             .setResistance(10.0F)
             .setVisualUpdateOnMetadata()
@@ -202,8 +204,8 @@ public class NFCBlocks {
             .setBlockSound(BlockSounds.GLASS)
             .setHardness(0.3F)
             .setTags(BlockTags.MINEABLE_BY_PICKAXE, BlockTags.EXTENDS_MOTION_SENSOR_RANGE)
-            .setBlockModel(block -> new BlockModelVariants<BlockGlass>(window, "window", windowVariants))
-            .setItemBlock(block -> new ItemBlockVariants(block, windowVariants))
+            .setBlockModel(block -> new BlockModelVariantsPainted<BlockGlass>(window, "window", windowVariants))
+            .setItemBlock(block -> new ItemBlockVariantsPainted(block, windowVariants))
             .build(new BlockGlass("window", BTANFC.config.getInt("BlockIDs.window"), Material.glass));
 
         // I don't know why but this only works for 2 blocks and then it "[Client-Main/WARN] (halplibe) Could not find parent stack of '1 * tile.btanfc.window:2' in the list! does it exist? adding stack to end of list!"

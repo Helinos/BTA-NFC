@@ -134,7 +134,6 @@ public class BTANFC implements ModInitializer {
 		}
 		BTANFC.LOGGER.info("Added " + MUSIC_NAMES.length + " pieces of music to the random music pool.");
 		
-		
 		ParticleHelper.createParticle("sporePurple", (world, x, y, z, deltaX, deltaY, deltaZ, i) -> new EntitySporeFX(world, x, y, z, deltaX, deltaY, deltaZ, 0.98F, 0.78F, 1.0F));
 		ParticleHelper.createParticle("sporeBlue", (world, x, y, z, deltaX, deltaY, deltaZ, i) -> new EntitySporeFX(world, x, y, z, deltaX, deltaY, deltaZ, 0.78F, 0.98F, 1.0F));
 
