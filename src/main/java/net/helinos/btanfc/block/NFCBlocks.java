@@ -5,11 +5,13 @@ import net.helinos.btanfc.block.model.BlockModelAxisAlignedVariants;
 import net.helinos.btanfc.block.model.BlockModelVariants;
 import net.helinos.btanfc.item.ItemBlockVariants;
 import net.helinos.btanfc.item.NFCItems;
+import net.minecraft.client.render.block.model.BlockModelCrossedSquares;
 import net.minecraft.client.render.block.model.BlockModelHorizontalRotation;
 import net.minecraft.client.render.block.model.BlockModelSlab;
 import net.minecraft.client.render.block.model.BlockModelStairs;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockGlass;
+import net.minecraft.core.block.BlockMushroom;
 import net.minecraft.core.block.BlockSlab;
 import net.minecraft.core.block.BlockStairs;
 import net.minecraft.core.block.material.Material;
@@ -100,9 +102,49 @@ public class NFCBlocks {
     public static BlockAxisAlignedVariants laminatedWoodAA;
     public static BlockAxisAlignedVariants logAlternate;
     public static BlockPebble pebble;
+    public static BlockMushroomFire mushroomFire;
+    public static BlockMushroom mushroomGlowing;
+    public static BlockMushroomBiolum mushroomPurple;
+    public static BlockMushroomBiolum mushroomBlue;
 
     public static void init() {
         BTANFC.LOGGER.info("Initializing blocks.");
+
+        mushroomPurple = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.GRASS)
+            .setHardness(0.0F)
+            .setLuminance(11)
+            .setTags(BlockTags.BROKEN_BY_FLUIDS, BlockTags.PLANTABLE_IN_JAR)
+            .setTextures("btanfc:block/mushroom_purple")
+            .setBlockModel(BlockModelCrossedSquares::new)
+            .build(new BlockMushroomBiolum("mushroom.purple", BTANFC.config.getInt("BlockIDs.mushroomPurple"), "sporePurple"));
+
+        mushroomBlue = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.GRASS)
+            .setHardness(0.0F)
+            .setLuminance(11)
+            .setTags(BlockTags.BROKEN_BY_FLUIDS, BlockTags.PLANTABLE_IN_JAR)
+            .setTextures("btanfc:block/mushroom_blue")
+            .setBlockModel(BlockModelCrossedSquares::new)
+            .build(new BlockMushroomBiolum("mushroom.blue", BTANFC.config.getInt("BlockIDs.mushroomBlue"), "sporeBlue"));
+
+        mushroomGlowing = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.GRASS)
+            .setHardness(0.0F)
+            .setLuminance(13)
+            .setTags(BlockTags.BROKEN_BY_FLUIDS, BlockTags.PLANTABLE_IN_JAR)
+            .setTextures("btanfc:block/mushroom_glowing")
+            .setBlockModel(BlockModelCrossedSquares::new)
+            .build(new BlockMushroom("mushroom.glowing", BTANFC.config.getInt("BlockIDs.mushroomGlowing")));
+
+        mushroomFire = new BlockBuilder(BTANFC.MOD_ID)
+            .setBlockSound(BlockSounds.GRASS)
+            .setHardness(0.0F)
+            .setLuminance(11)
+            .setTags(BlockTags.BROKEN_BY_FLUIDS, BlockTags.PLANTABLE_IN_JAR)
+            .setTextures("btanfc:block/mushroom_fire")
+            .setBlockModel(BlockModelCrossedSquares::new)
+            .build(new BlockMushroomFire("mushroom.fire", BTANFC.config.getInt("BlockIDs.mushroomFire")));
 
         pebble = new BlockBuilder(BTANFC.MOD_ID)
             .setBlockSound(BlockSounds.GRAVEL)

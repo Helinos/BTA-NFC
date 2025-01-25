@@ -43,6 +43,11 @@ tile.btanfc.pebble.small.name=Small Pebble Block
 tile.btanfc.pebble.medium.name=Medium Pebble Block
 tile.btanfc.pebble.large.name=Large Pebble Block
 
+tile.btanfc.mushroom.fire.name=Fire Mushroom
+tile.btanfc.mushroom.glowing.name=Glowshroom
+tile.btanfc.mushroom.purple.name=Purple Mushroom
+tile.btanfc.mushroom.blue.name= Blue Mushroom
+
 item.btanfc.food.cheese.name=Cheese
 item.btanfc.food.pizza.cooked.name=Pizza
 item.btanfc.food.pizza.raw.name=Raw Pizza

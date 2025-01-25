@@ -2,6 +2,7 @@ package net.helinos.btanfc;
 
 import net.fabricmc.api.ModInitializer;
 import net.helinos.btanfc.block.NFCBlocks;
+import net.helinos.btanfc.entity.fx.EntitySporeFX;
 import net.helinos.btanfc.item.NFCItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
@@ -21,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.BlockBuilder;
 import turniplabs.halplibe.helper.ItemHelper;
+import turniplabs.halplibe.helper.ParticleHelper;
 import turniplabs.halplibe.util.TomlConfigHandler;
 import turniplabs.halplibe.util.toml.Toml;
 
@@ -116,8 +118,8 @@ public class BTANFC implements ModInitializer {
 	public void onInitialize() {
 		NFCBlocks.init();
 		NFCItems.init();
+		
 
-		// No idea if this works or if there's a "proper" way of doing this.
 		BTANFC.LOGGER.info("Adding music.");
 		Minecraft minecraft = Minecraft.getMinecraft(getClass());
 		for (String musicName : MUSIC_NAMES) {
@@ -131,6 +133,10 @@ public class BTANFC implements ModInitializer {
 			minecraft.sndManager.addMusic(musicName + ".ogg", music);
 		}
 		BTANFC.LOGGER.info("Added " + MUSIC_NAMES.length + " pieces of music to the random music pool.");
+		
+		
+		ParticleHelper.createParticle("sporePurple", (world, x, y, z, deltaX, deltaY, deltaZ, i) -> new EntitySporeFX(world, x, y, z, deltaX, deltaY, deltaZ, 0.98F, 0.78F, 1.0F));
+		ParticleHelper.createParticle("sporeBlue", (world, x, y, z, deltaX, deltaY, deltaZ, i) -> new EntitySporeFX(world, x, y, z, deltaX, deltaY, deltaZ, 0.78F, 0.98F, 1.0F));
 
 		LOGGER.info("BTA-NFC initialized.");
 	}

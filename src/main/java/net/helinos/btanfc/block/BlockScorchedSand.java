@@ -20,8 +20,8 @@ public class BlockScorchedSand extends BlockSand {
     }
 
     @Override
-    public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-        if (rand.nextInt(32) != 0) {
+    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+        if (random.nextInt(32) != 0) {
             return;
         }
 
@@ -32,10 +32,10 @@ public class BlockScorchedSand extends BlockSand {
             return;
         }
 
-        double spawnX = x + rand.nextDouble();
-        double spawnY = y + 1 - (rand.nextDouble() * 0.05);
-        double spawnZ = z + rand.nextDouble();
-        if (rand.nextInt(3) == 0) {
+        double spawnX = x + random.nextDouble();
+        double spawnY = y + 1 - (random.nextDouble() * 0.05);
+        double spawnZ = z + random.nextDouble();
+        if (random.nextInt(3) == 0) {
             world.spawnParticle("smoke", spawnX, spawnY, spawnZ, 0.0, 0.0, 0.0, 0);
         } else {
             world.spawnParticle("largesmoke", spawnX, spawnY, spawnZ, 0.0, 0.0, 0.0, 0);
