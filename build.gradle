@@ -87,7 +87,8 @@ dependencies {
 
 	// Helper library
 	// If you do not need Halplibe you can comment this line out or delete this line
-	implementation "turniplabs:halplibe:${project.halplibe_version}"
+	//implementation "turniplabs:halplibe:${project.halplibe_version}"
+	implementation files("libs/halplibe-4.1.3.jar")
 
 	modImplementation "ModMenu:ModMenu:${project.mod_menu_version}"
 

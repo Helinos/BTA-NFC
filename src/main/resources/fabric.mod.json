@@ -19,8 +19,12 @@
     "main": [
       "net.helinos.btanfc.BTANFC"
     ],
+    "beforeClientStart": [
+      "net.helinos.btanfc.BTANFC"
+    ],
     "recipesReady": [
-      "net.helinos.btanfc.recipe.NFCRecipes"
+      "net.helinos.btanfc.recipe.NFCRecipes",
+      "net.helinos.btanfc.block.NFCBlocks"
     ]
   },
   "mixins": [

@@ -14,11 +14,20 @@ public class BlockVariants extends Block {
 
     @Override
     public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int metadata, TileEntity tileEntity) {
-        return getBreakResult(new ItemStack(this), world, dropCause, metadata);
-    }
+        ItemStack itemStack = new ItemStack(this);
+        itemStack.setMetadata(metadata);
+        
+        // Awful hack but I'm too exhausted to care
+        if (this.key == "tile.btanfc.window") {
+            switch (dropCause) {
+                case SILK_TOUCH:
+                case PICK_BLOCK:
+                    return new ItemStack[]{new ItemStack( itemStack )};
+                default:
+                    return null;
+            }
+        }
 
-    public static ItemStack[] getBreakResult(ItemStack itemStack, World world, EnumDropCause dropCause, int metadata) {
-        itemStack.setMetadata(metadata & 0b111111);
         return dropCause != EnumDropCause.IMPROPER_TOOL ? new ItemStack[] { itemStack } : null;
     }
 }

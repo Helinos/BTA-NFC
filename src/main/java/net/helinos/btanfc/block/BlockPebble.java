@@ -45,6 +45,8 @@ public class BlockPebble extends BlockSand {
 
     @Override
     public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int metadata, TileEntity tileEntity) {
-        return BlockVariants.getBreakResult(new ItemStack(this), world, dropCause, metadata);
+        ItemStack itemStack = new ItemStack(this);
+        itemStack.setMetadata(metadata);
+        return dropCause != EnumDropCause.IMPROPER_TOOL ? new ItemStack[] { itemStack } : null;
     }
 }

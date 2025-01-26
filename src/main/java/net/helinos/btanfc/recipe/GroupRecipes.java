@@ -1,7 +1,5 @@
 package net.helinos.btanfc.recipe;
 
-import org.checkerframework.checker.units.qual.min;
-
 import net.helinos.btanfc.block.NFCBlocks;
 import net.helinos.btanfc.recipe.entry.RecipeEntryCraftingGroup;
 import net.minecraft.core.block.Block;
@@ -9,7 +7,6 @@ import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.item.block.ItemBlock;
 import net.minecraft.core.item.block.ItemBlockPainted;
 
 public class GroupRecipes {
