@@ -3,17 +3,21 @@ package net.helinos.btanfc.block.model;
 import java.security.InvalidParameterException;
 import java.util.Arrays;
 
+import net.fabricmc.api.Environment;
+import net.fabricmc.api.EnvType;
 import net.minecraft.client.render.block.model.BlockModelStandard;
-import net.minecraft.client.render.stitcher.IconCoordinate;
-import net.minecraft.client.render.stitcher.TextureRegistry;
+import net.minecraft.client.render.texture.stitcher.IconCoordinate;
+import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.block.Block;
-import net.minecraft.core.item.ItemDye;
+import net.minecraft.core.block.BlockLogic;
+import net.minecraft.core.util.helper.DyeColor;
 import net.minecraft.core.util.helper.Side;
 
-public class BlockModelVariantsPainted<T extends Block> extends BlockModelStandard<T> {
+@Environment(EnvType.CLIENT)
+public class BlockModelVariantsPainted<T extends BlockLogic> extends BlockModelStandard<T> {
     public final IconCoordinate[] textures = new IconCoordinate[256];
 
-    public BlockModelVariantsPainted(Block block, String texturePrefix, String[] variantList) {
+    public BlockModelVariantsPainted(Block<T> block, String texturePrefix, String[] variantList) {
         super(block);
 
         if (variantList.length > 8) {
@@ -29,7 +33,7 @@ public class BlockModelVariantsPainted<T extends Block> extends BlockModelStanda
 
             for(int colorIndex = 0; colorIndex < 16; colorIndex++) {
                 int textureIndex = (1 << 7) | (colorIndex << 3) | variantIndex;
-                textures[textureIndex] = TextureRegistry.getTexture("btanfc:block/" + texturePrefix + underscore + name + "_" + ItemDye.dyeColors[15 - colorIndex]);
+                textures[textureIndex] = TextureRegistry.getTexture("btanfc:block/" + texturePrefix + underscore + name + "_" + DyeColor.colorFromBlockMeta(15 - colorIndex).colorID.toLowerCase());
             }
         }
     }

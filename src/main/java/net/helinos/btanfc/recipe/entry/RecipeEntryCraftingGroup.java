@@ -3,7 +3,7 @@ package net.helinos.btanfc.recipe.entry;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingShaped;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.player.inventory.InventoryCrafting;
+import net.minecraft.core.player.inventory.container.ContainerCrafting;
 
 public class RecipeEntryCraftingGroup extends RecipeEntryCraftingShaped{
     RecipeGroupLambda lambda;
@@ -23,8 +23,8 @@ public class RecipeEntryCraftingGroup extends RecipeEntryCraftingShaped{
     }
 
     @Override
-    public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
+    public ItemStack getCraftingResult(ContainerCrafting containerCrafting) {
         ItemStack outputItemStack = super.getOutput().copy();
-        return lambda.newItemStack(inventoryCrafting, outputItemStack.stackSize);
+        return lambda.newItemStack(containerCrafting, outputItemStack.stackSize);
     }
 }

@@ -2,20 +2,21 @@ package net.helinos.btanfc.block;
 
 import java.util.Random;
 
-import net.minecraft.core.block.BlockMushroom;
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockLogicMushroom;
 import net.minecraft.core.world.World;
 
-public class BlockMushroomBiolum extends BlockMushroom {
+public class BlockLogicMushroomBiolum extends BlockLogicMushroom {
     private int tick = 0;
     private String particle;
     
-    public BlockMushroomBiolum(String key, int id, String particle) {
-        super(key, id);
+    public BlockLogicMushroomBiolum(Block<?> block, String particle) {
+        super(block);
         this.particle = particle;
     }
     
     @Override
-    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+    public void animationTick(World world, int x, int y, int z, Random random) {
         if (tick > 10) {
             tick = 0;
         } else {

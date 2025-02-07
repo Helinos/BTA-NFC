@@ -3,7 +3,7 @@ package net.helinos.btanfc.recipe;
 import net.helinos.btanfc.BTANFC;
 import net.helinos.btanfc.block.NFCBlocks;
 import net.helinos.btanfc.recipe.entry.RecipeEntryCarpentry;
-import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.data.DataLoader;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
@@ -44,10 +44,10 @@ public class NFCRecipes implements RecipeEntrypoint {
 
     public void resetGroups() {
         RECIPE_NAMESPACE = new NFCRecipeNamespace();
-        WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.workbench)));
-        FURNACE = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.furnaceStoneIdle)));
-        TROMMEL = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.trommelActive)));
-        CARPENTRY = new RecipeGroup<>(new RecipeSymbol(new ItemStack(NFCBlocks.carpentryWorkstation)));
+        WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Blocks.WORKBENCH)));
+        FURNACE = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Blocks.FURNACE_STONE_IDLE)));
+        TROMMEL = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Blocks.TROMMEL_ACTIVE)));
+        CARPENTRY = new RecipeGroup<>(new RecipeSymbol(new ItemStack(NFCBlocks.CARPENTRY_WORKSTATION)));
     }
 
     public void registerNamespaces() {

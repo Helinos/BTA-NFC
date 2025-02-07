@@ -3,7 +3,7 @@ package net.helinos.btanfc.feature;
 import java.util.Random;
 
 import net.helinos.btanfc.block.NFCBlocks;
-import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.generate.feature.WorldFeature;
 
@@ -11,7 +11,7 @@ public class WorldFeatureScorchedSandPatch extends WorldFeature {
     public WorldFeatureScorchedSandPatch() {}
     
     @Override
-    public boolean generate(World world, Random random, int x, int y, int z) {
+    public boolean place(World world, Random random, int x, int y, int z) {
         // Move down until we find an air block if we didn't start in an air block
         if (world.getBlockId(x, y, z) != 0) {
             while (world.getBlockId(x, y, z) != 0) {
@@ -36,7 +36,7 @@ public class WorldFeatureScorchedSandPatch extends WorldFeature {
                 continue;
             }
 
-            if (blockID != Block.netherrack.id) {
+            if (blockID != Blocks.NETHERRACK.id()) {
                 return false;
             }
 
@@ -67,7 +67,7 @@ public class WorldFeatureScorchedSandPatch extends WorldFeature {
                     }
                     
                     int thisBlock = world.getBlockId(x, y, z);
-                    if (thisBlock != Block.netherrack.id && thisBlock != Block.oreNethercoalNetherrack.id) {
+                    if (thisBlock != Blocks.NETHERRACK.id() && thisBlock != Blocks.ORE_NETHERCOAL_NETHERRACK.id()) {
                         continue;
                     }
                     
@@ -88,20 +88,20 @@ public class WorldFeatureScorchedSandPatch extends WorldFeature {
                     int oneAbove = world.getBlockId(x, y + 1, z);
                     int twoBelow = world.getBlockId(x, y - 2, z);
                     // If not one block above an overhang
-                    if (twoBelow == Block.netherrack.id || twoBelow == Block.oreNethercoalNetherrack.id) {
+                    if (twoBelow == Blocks.NETHERRACK.id() || twoBelow == Blocks.ORE_NETHERCOAL_NETHERRACK.id()) {
                         // If bottom of patch
                         if (startY - y == heightBelow) {
                             chooseSandOrSandstone(world, oneAbove, x, y, z);
                         // If one above bottom of batch
                         } else if (startY - y + 1 == heightBelow) {
                             if (random.nextBoolean()) {
-                                world.setBlock(x, y, z, NFCBlocks.scorchedSand.id);     
+                                world.setBlock(x, y, z, NFCBlocks.SCORCHED_SAND.id());     
                             } else {
                                 chooseSandOrSandstone(world, oneAbove, x, y, z);
                             }
                         // Everywhere else
                         } else {
-                            world.setBlock(x, y, z, NFCBlocks.scorchedSand.id);
+                            world.setBlock(x, y, z, NFCBlocks.SCORCHED_SAND.id());
                         }
 
                         continue;
@@ -109,9 +109,9 @@ public class WorldFeatureScorchedSandPatch extends WorldFeature {
 
                     int oneBelow = world.getBlockId(x, y - 1, z);
                     // If one block above an overhang            
-                    if ((oneBelow == Block.netherrack.id || oneBelow == Block.oreNethercoalNetherrack.id)) {
+                    if ((oneBelow == Blocks.NETHERRACK.id() || oneBelow == Blocks.ORE_NETHERCOAL_NETHERRACK.id())) {
                         chooseSandOrSandstone(world, oneAbove, x, y, z);
-                        world.setBlock(x, y - 1, z, NFCBlocks.scorchedSandstone.id);
+                        world.setBlock(x, y - 1, z, NFCBlocks.SCORCHED_SANDSTONE.id());
                     }
                 }
             }
@@ -122,10 +122,10 @@ public class WorldFeatureScorchedSandPatch extends WorldFeature {
 
     // Prevent sandstone from generating without sand above it
     private void chooseSandOrSandstone(World world, int oneAbove, int x, int y, int z) {
-        if (oneAbove == NFCBlocks.scorchedSand.id || oneAbove == NFCBlocks.scorchedSandstone.id) {
-            world.setBlock(x, y, z, NFCBlocks.scorchedSandstone.id);
+        if (oneAbove == NFCBlocks.SCORCHED_SAND.id() || oneAbove == NFCBlocks.SCORCHED_SANDSTONE.id()) {
+            world.setBlock(x, y, z, NFCBlocks.SCORCHED_SANDSTONE.id());
         } else {
-            world.setBlock(x, y, z, NFCBlocks.scorchedSand.id);
+            world.setBlock(x, y, z, NFCBlocks.SCORCHED_SAND.id());
         }
     }
 }

@@ -1,5 +1,5 @@
 package net.helinos.btanfc.interfaces.mixin;
 
-public interface IEntityPlayerMP {
+public interface IPlayer {
     void displayGUICarpentryWorkstation(int x, int y, int z);
 }

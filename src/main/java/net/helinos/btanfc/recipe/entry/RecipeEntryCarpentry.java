@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import net.helinos.btanfc.container.inventory.InventoryCarpentry;
+import net.helinos.btanfc.inventory.container.ContainerCarpentry;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeEntryBase;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
@@ -18,7 +18,7 @@ public class RecipeEntryCarpentry extends RecipeEntryBase<RecipeSymbol[], ItemSt
         super(input, outputs, (Object) null);
     }
 
-    public ArrayList<ItemStack> matches(InventoryCarpentry inputInventory) {
+    public ArrayList<ItemStack> matches(ContainerCarpentry inputInventory) {
         ArrayList<RecipeSymbol> symbols = new ArrayList<>();
         symbols.add(this.getInput()[0]);
         for (ItemStack output : this.getOutput()) {
@@ -27,7 +27,7 @@ public class RecipeEntryCarpentry extends RecipeEntryBase<RecipeSymbol[], ItemSt
             }
         }
 
-        ItemStack inputItem = inputInventory.getStackInSlot(0);
+        ItemStack inputItem = inputInventory.getItem(0);
 
         for (RecipeSymbol symbol : symbols) {
             if (inputItem == null || symbol == null) {
@@ -44,9 +44,13 @@ public class RecipeEntryCarpentry extends RecipeEntryBase<RecipeSymbol[], ItemSt
         return null;
     }
 
-    public ArrayList<ItemStack> getResult(InventoryCarpentry inventoryCarpentry) {
+    public ArrayList<ItemStack> getResult(ContainerCarpentry inventoryCarpentry) {
         ArrayList<ItemStack> results = new ArrayList<ItemStack>();
-        ItemStack input = inventoryCarpentry.getStackInSlot(0);
+        ItemStack input = inventoryCarpentry.getItem(0);
+
+        if (input == null) {
+            return results;
+        }
 
         for (ItemStack itemStack : this.getOutput()) {
             if (input.itemID == itemStack.itemID && input.getMetadata() == itemStack.getMetadata()) {

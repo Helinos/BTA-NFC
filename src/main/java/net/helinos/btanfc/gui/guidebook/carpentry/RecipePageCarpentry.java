@@ -9,33 +9,33 @@ import org.lwjgl.opengl.GL11;
 
 import net.helinos.btanfc.recipe.entry.RecipeEntryCarpentry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiRenderItem;
-import net.minecraft.client.gui.GuiTooltip;
-import net.minecraft.client.gui.guidebook.GuidebookPage;
+import net.minecraft.client.gui.ItemElement;
+import net.minecraft.client.gui.TooltipElement;
 import net.minecraft.client.gui.guidebook.RecipePage;
-import net.minecraft.client.render.FontRenderer;
-import net.minecraft.client.render.RenderEngine;
+import net.minecraft.client.gui.guidebook.SlotGuidebook;
+import net.minecraft.client.render.Font;
+import net.minecraft.client.render.TextureManager;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.slot.Slot;
-import net.minecraft.core.player.inventory.slot.SlotGuidebook;
 
-public class CarpentryPage extends RecipePage<RecipeEntryCarpentry> {
+public class RecipePageCarpentry extends RecipePage<RecipeEntryCarpentry> {
     private static final int SLOT_SIDE_LENGTH = 18;
     private static final int ARROW_WIDTH = 32;
     private static final int HALF_PAGE_WIDTH = 158 / 2;
     
     public ArrayList<SlotGuidebook> slots = new ArrayList<>();
     public HashMap<RecipeEntryCarpentry, ArrayList<SlotGuidebook>> recipeToSlotsMap;
-    private final GuiTooltip guiTooltip;
-    private final GuiRenderItem guiRenderItem;
-    private static final Minecraft minecraft = Minecraft.getMinecraft(GuidebookPage.class);
+    private final TooltipElement tooltipElement;
+    private final ItemElement itemElement;
+    private static final Minecraft minecraft = Minecraft.getMinecraft();
 
-    public CarpentryPage(CarpentrySection section, ArrayList<RecipeEntryCarpentry> recipes) {
+    public RecipePageCarpentry(GuidebookSectionCarpentry section, ArrayList<RecipeEntryCarpentry> recipes) {
         super(section);
         this.recipes = recipes;
-        this.guiTooltip = new GuiTooltip(minecraft);
-        this.guiRenderItem = new GuiRenderItem(minecraft);
+        this.tooltipElement = new TooltipElement(minecraft);
+        this.itemElement = new ItemElement(minecraft);
         this.recipeToSlotsMap = new HashMap<>();
 
         int yOffset = 39;
@@ -74,9 +74,9 @@ public class CarpentryPage extends RecipePage<RecipeEntryCarpentry> {
     }
 
     @Override
-    protected void renderForeground(RenderEngine renderEngine, FontRenderer fontRenderer, int x, int y, int mouseX, int mouseY, float partialTicks) {
+    protected void renderForeground(TextureManager textureManager, Font font, int x, int y, int mouseX, int mouseY, float partialTicks) {
         if (this.recipes.isEmpty()) {
-            this.drawStringCenteredNoShadow(fontRenderer, "No recipes found :(", x + 79, y + 110, -8355712);
+            this.drawStringCenteredNoShadow(font, I18n.getInstance().translateKey("guidebook.section.search.error.no_recipes"), x + 79, y + 110, -8355712);
         }
 
         SlotGuidebook mouseOverSlot = null;
@@ -89,28 +89,28 @@ public class CarpentryPage extends RecipePage<RecipeEntryCarpentry> {
                     partialTicks = 0L;
             }
 
-            this.drawSlot(renderEngine, x + slot.xDisplayPosition - 1, y + slot.yDisplayPosition - 1, -1);
+            this.drawSlot(x + slot.x - 1, y + slot.y - 1, -1);
             if (this.getIsMouseOverSlot(slot, x, y, mouseX, mouseY)) {
                 mouseOverSlot = slot;
             }
 
-            this.guiRenderItem.render(slot.getStack(), x + slot.xDisplayPosition, y + slot.yDisplayPosition, mouseOverSlot == slot, slot);
+            this.itemElement.render(slot.getItemStack(), x + slot.x, y + slot.y, mouseOverSlot == slot, slot);
         }
     }
     
     public boolean getIsMouseOverSlot(Slot slot, int x, int y, int mouseX, int mouseY) {
-        return mouseX >= x + slot.xDisplayPosition - 1 && mouseX < x + slot.xDisplayPosition + 16 + 1 && mouseY >= y + slot.yDisplayPosition - 1 && mouseY < y + slot.yDisplayPosition + 16 + 1;
+        return mouseX >= x + slot.x - 1 && mouseX < x + slot.x + 16 + 1 && mouseY >= y + slot.y - 1 && mouseY < y + slot.y + 16 + 1;
     }
 
     @Override
-    protected void renderBackground(RenderEngine renderEngine, int x, int y) {
-        super.renderBackground(renderEngine, x, y);
+    protected void renderBackground(TextureManager textureManager, int x, int y) {
+        super.renderBackground(textureManager, x, y);
 
         for(RecipeEntryCarpentry recipe : this.recipes) {
             ArrayList<SlotGuidebook> slots = this.recipeToSlotsMap.get(recipe);
             
-            int displayX = x + slots.get(slots.size() - 1).xDisplayPosition + SLOT_SIDE_LENGTH + 1;
-            int displayY = y + slots.get(slots.size() - 1).yDisplayPosition;
+            int displayX = x + slots.get(slots.size() - 1).x + SLOT_SIDE_LENGTH + 1;
+            int displayY = y + slots.get(slots.size() - 1).y;
             // This is awful but I don't know how to get my own texture here
             this.drawTexturedModalRect(displayX, displayY, 255, 0, 1, 15);
             this.drawTexturedModalRect(displayX + 1, displayY, 254, 0, 1, 15);
@@ -125,8 +125,8 @@ public class CarpentryPage extends RecipePage<RecipeEntryCarpentry> {
    }
 
     @Override
-    protected void renderOverlay(RenderEngine renderEngine, FontRenderer fontRenderer, int x, int y, int mouseX, int mouseY, float partialTicks) {
-        super.renderOverlay(renderEngine, fontRenderer, x, y, mouseX, mouseY, partialTicks);
+    protected void renderOverlay(TextureManager textureManager, Font font, int x, int y, int mouseX, int mouseY, float partialTicks) {
+        super.renderOverlay(textureManager, font, x, y, mouseX, mouseY, partialTicks);
         SlotGuidebook mouseOverSlot = null;
         Iterator<SlotGuidebook> slotsIterator = this.slots.iterator();
 
@@ -144,12 +144,12 @@ public class CarpentryPage extends RecipePage<RecipeEntryCarpentry> {
 
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                 } while (mouseOverSlot == null);
-            } while (!mouseOverSlot.hasStack());
+            } while (!mouseOverSlot.hasItem());
 
             boolean showDescription = Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) || (Boolean)minecraft.gameSettings.alwaysShowDescriptions.value;
-            String str = this.guiTooltip.getTooltipText(mouseOverSlot.getStack(), showDescription, mouseOverSlot);
+            String str = this.tooltipElement.getTooltipText(mouseOverSlot.getItemStack(), showDescription, mouseOverSlot);
             if (!str.isEmpty()) {
-                this.guiTooltip.render(str, mouseX, mouseY, 8, -8);
+                this.tooltipElement.render(str, mouseX, mouseY, 8, -8);
             }
         }
     }

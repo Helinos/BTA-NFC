@@ -7,8 +7,8 @@ import java.util.List;
 import org.spongepowered.asm.mixin.Mixin;
 
 import net.helinos.btanfc.recipe.entry.RecipeEntryCarpentry;
-import net.helinos.btanfc.container.inventory.InventoryCarpentry;
 import net.helinos.btanfc.interfaces.mixin.IRecipeRegistry;
+import net.helinos.btanfc.inventory.container.ContainerCarpentry;
 import net.minecraft.core.data.registry.Registry;
 import net.minecraft.core.data.registry.recipe.RecipeEntryBase;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
@@ -36,7 +36,7 @@ public abstract class RecipeRegistryMixin extends Registry<RecipeNamespace> impl
     }
     
     @Override
-    public ArrayList<ItemStack> findMatchingRecipe(InventoryCarpentry inventoryCarpentry) {
+    public ArrayList<ItemStack> findMatchingRecipe(ContainerCarpentry inventoryCarpentry) {
         for(int index = 0; index < this.getAllCarpentryRecipes().size(); ++index) {
             RecipeEntryCarpentry recipe = this.getAllCarpentryRecipes().get(index);
             ArrayList<ItemStack> results = recipe.matches(inventoryCarpentry);

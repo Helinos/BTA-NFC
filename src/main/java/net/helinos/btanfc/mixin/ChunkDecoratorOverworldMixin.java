@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.helinos.btanfc.block.NFCBlocks;
 import net.helinos.btanfc.feature.WorldFeatureOreCloud;
-import net.minecraft.core.block.BlockSand;
+import net.minecraft.core.block.BlockLogicSand;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.Chunk;
 import net.minecraft.core.world.generate.chunk.perlin.overworld.ChunkDecoratorOverworld;
@@ -25,7 +25,7 @@ public abstract class ChunkDecoratorOverworldMixin {
     @Inject(method = "decorate", at = @At("TAIL"))
     private void generatePebble(Chunk chunk, CallbackInfo callbackInfo) {
         this.world.scheduledUpdatesAreImmediate = true;
-        BlockSand.fallInstantly = true;
+        BlockLogicSand.fallInstantly = true;
 
         int chunkX = chunk.xPosition;
         int chunkZ = chunk.zPosition;
@@ -41,17 +41,17 @@ public abstract class ChunkDecoratorOverworldMixin {
                 int xStart = x + random.nextInt(16);
                 int yStart = random.nextInt(rangeY);
                 int zStart = z + random.nextInt(16);
-                new WorldFeatureOreCloud(NFCBlocks.pebble.id, 10, 2, 80).generate(this.world, random, xStart, yStart, zStart);
+                new WorldFeatureOreCloud(NFCBlocks.PEBBLE.id(), 10, 2, 80).place(this.world, random, xStart, yStart, zStart);
             }
 
             int xStart = x + random.nextInt(16);
             int yStart = random.nextInt(rangeY);
             int zStart = z + random.nextInt(16);
-            new WorldFeatureOre(NFCBlocks.pebble.id, 32, false).generate(this.world, random, xStart, yStart, zStart);
+            new WorldFeatureOre(NFCBlocks.PEBBLE.id(), 32).place(this.world, random, xStart, yStart, zStart);
         }
 
 
-        BlockSand.fallInstantly = false;
+        BlockLogicSand.fallInstantly = false;
         this.world.scheduledUpdatesAreImmediate = false;
     }
 }

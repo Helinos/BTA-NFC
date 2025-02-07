@@ -4,8 +4,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import net.helinos.btanfc.interfaces.mixin.INetClientHandler;
-import net.minecraft.core.net.handler.NetHandler;
+import net.helinos.btanfc.interfaces.mixin.IPacketHandlerClient;
+import net.minecraft.core.net.handler.PacketHandler;
 import net.minecraft.core.net.packet.Packet;
 
 public class PacketOpenCarpentryWindow extends Packet {
@@ -19,17 +19,17 @@ public class PacketOpenCarpentryWindow extends Packet {
     }
 
     @Override
-    public int getPacketSize() {
+    public int getEstimatedSize() {
         return 4;
     }
 
     @Override
-    public void processPacket(NetHandler netHandler) {
-        ((INetClientHandler)netHandler).handleOpenCarpentryWindow(this);
+    public void handlePacket(PacketHandler packetHandler) {
+        ((IPacketHandlerClient) packetHandler).handleOpenCarpentryWindow(this);
     }
 
     @Override
-    public void readPacketData(DataInputStream dataInputStream) throws IOException {
+    public void read(DataInputStream dataInputStream) throws IOException {
         this.windowId = dataInputStream.readByte();
         this.blockX = dataInputStream.readByte();
         this.blockY = dataInputStream.readByte();
@@ -37,7 +37,7 @@ public class PacketOpenCarpentryWindow extends Packet {
     }
 
     @Override
-    public void writePacketData(DataOutputStream dataOutputStream) throws IOException {
+    public void write(DataOutputStream dataOutputStream) throws IOException {
         dataOutputStream.writeByte(this.windowId);
         dataOutputStream.writeByte(this.blockX);
         dataOutputStream.writeByte(this.blockY);

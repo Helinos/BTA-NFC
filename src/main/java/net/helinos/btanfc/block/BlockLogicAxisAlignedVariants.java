@@ -1,8 +1,11 @@
 package net.helinos.btanfc.block;
 
+import org.jetbrains.annotations.NotNull;
+
+import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
-import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.entity.Mob;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.enums.PlacementMode;
 import net.minecraft.core.item.ItemStack;
@@ -10,14 +13,21 @@ import net.minecraft.core.util.helper.Axis;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 
-public class BlockAxisAlignedVariants extends BlockVariants {
-    public BlockAxisAlignedVariants(String key, int id, Material material) {
-        super(key, id, material);
+public class BlockLogicAxisAlignedVariants extends BlockLogicVariants {
+    public BlockLogicAxisAlignedVariants(Block<?> block, Material material) {
+        super(block, material);
     }
 
     @Override
-    public void onBlockPlaced(World world, int x, int y, int z, Side side, EntityLiving entity, double sideHeight) {
-        Axis axis = entity.getPlacementDirection(side, PlacementMode.SIDE).getAxis();
+    public void onBlockPlacedByMob(World world, int x, int y, int z, @NotNull Side side, Mob mob, double xPlaced, double yPlaced) {
+        Axis axis = mob.getPlacementDirection(side, PlacementMode.SIDE).getAxis();
+        int metadata = world.getBlockMetadata(x, y, z);
+        world.setBlockMetadataWithNotify(x, y, z, metadata | axisToMeta(axis));
+    }
+
+    @Override
+    public void onBlockPlacedOnSide(World world, int x, int y, int z, @NotNull Side side, double xPlaced, double yPlaced) {
+        Axis axis = side.getAxis();
         int metadata = world.getBlockMetadata(x, y, z);
         world.setBlockMetadataWithNotify(x, y, z, metadata | axisToMeta(axis));
     }

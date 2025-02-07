@@ -5,17 +5,22 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "ChunkDecoratorNetherMixin",
+    "ChunkDecoratorOverworldMixin",
+    "MinecraftMixin",
+    "RecipeRegistryMixin",
     "TileEntityFurnaceMixin",
     "WorldFeatureGlowstoneAMixin",
-    "WorldFeatureGlowstoneBMixin",
-    "EntityPlayerMPMixin",
-    "NetClientHandlerMixin",
-    "RecipeRegistryMixin",
-    "GuiContainerMixin",
-    "GuidebookSectionsMixin",
-    "ChunkDecoratorOverworldMixin"
+    "WorldFeatureGlowstoneBMixin"
   ],
-  "client": [],
+  "client": [
+    "GuidebookSectionsMixin",
+    "PlayerLocalMixin",
+    "PacketHandlerClientMixin",
+    "ScreenContainerAbstractMixin"
+  ],
+  "server": [
+    "PlayerServerMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

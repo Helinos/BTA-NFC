@@ -23,8 +23,17 @@
       "net.helinos.btanfc.BTANFC"
     ],
     "recipesReady": [
-      "net.helinos.btanfc.recipe.NFCRecipes",
+      "net.helinos.btanfc.recipe.NFCRecipes"
+    ],
+    "initModels": [
+      "net.helinos.btanfc.NFCModels"
+    ],
+    "afterBlockInit": [
       "net.helinos.btanfc.block.NFCBlocks"
+    ],
+    "afterItemInit": [
+      "net.helinos.btanfc.block.NFCBlocks",
+      "net.helinos.btanfc.item.NFCItems"
     ]
   },
   "mixins": [

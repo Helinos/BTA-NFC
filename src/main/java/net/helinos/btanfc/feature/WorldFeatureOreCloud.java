@@ -4,7 +4,7 @@ import java.util.Random;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.generate.feature.WorldFeature;
 
@@ -20,11 +20,11 @@ public class WorldFeatureOreCloud extends WorldFeature {
         this.radius = radius;
         this.density = density;
         this.amount = amount;
-        this.generateInID = new int[] { Block.stone.id, Block.netherrack.id, Block.basalt.id, Block.limestone.id, Block.granite.id };
+        this.generateInID = new int[] { Blocks.STONE.id(), Blocks.NETHERRACK.id(), Blocks.BASALT.id(), Blocks.LIMESTONE.id(), Blocks.GRANITE.id() };
     }
 
     @Override
-    public boolean generate(World world, Random random, int blockX, int blockY, int blockZ) {
+    public boolean place(World world, Random random, int blockX, int blockY, int blockZ) {
         int adjustedAmount = (int) (amount - amount * random.nextFloat() * 0.2);
         boolean preGen[][][] = new boolean[radius * 2][radius * 2][radius * 2];
         double angleIncrement = Math.PI * 2 / adjustedAmount;

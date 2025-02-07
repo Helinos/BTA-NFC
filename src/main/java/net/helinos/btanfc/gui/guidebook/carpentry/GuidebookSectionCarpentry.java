@@ -14,12 +14,12 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.collection.Pair;
 import net.minecraft.core.util.helper.MathHelper;
 
-public class CarpentrySection extends SearchableGuidebookSection {
+public class GuidebookSectionCarpentry extends SearchableGuidebookSection {
     private final ArrayList<GuidebookPage> pages = new ArrayList<GuidebookPage>();
     private Pair<String, ArrayList<GuidebookPage>> filteredPages = null;
     
-    public CarpentrySection() {
-        super("guidebook.section.carpentry", new ItemStack(NFCBlocks.carpentryWorkstation), 0xbc9862, 0xffd700);
+    public GuidebookSectionCarpentry() {
+        super("guidebook.section.carpentry", new ItemStack(NFCBlocks.CARPENTRY_WORKSTATION), 0xbc9862, 0xffd700);
         this.reloadRecipes();
     }
 
@@ -32,7 +32,7 @@ public class CarpentrySection extends SearchableGuidebookSection {
       for(int page = 0; page < totalPages; ++page) {
          int recipeIndex = page * 3;
          ArrayList<RecipeEntryCarpentry> recipes = new ArrayList<RecipeEntryCarpentry>(allRecipes.subList(Math.min(recipeIndex, totalRecipes), Math.min(recipeIndex + 3, totalRecipes)));
-         this.pages.add(new CarpentryPage(this, recipes));
+         this.pages.add(new RecipePageCarpentry(this, recipes));
       }
    }
 
@@ -58,7 +58,7 @@ public class CarpentrySection extends SearchableGuidebookSection {
             int recipeIndex = page * 3;
             ArrayList<RecipeEntryCarpentry> recipes = new ArrayList<>(filteredRecipes.subList(Math.min(recipeIndex, filteredRecipeSize), Math.min(recipeIndex + 3, filteredRecipeSize)));
             if (!recipes.isEmpty()) {
-                filteredPages.add(new CarpentryPage(this, recipes));
+                filteredPages.add(new RecipePageCarpentry(this, recipes));
             }
         }
 

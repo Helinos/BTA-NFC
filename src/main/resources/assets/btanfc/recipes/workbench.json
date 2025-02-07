@@ -11,14 +11,14 @@
             {
                 "symbol": "S",
                 "stack": {
-                    "key": "tile.btanfc.scorched_sand",
+                    "key": "tile.btanfc.scorched.sand",
                     "amount": 1,
                     "meta": 0
                 }
             }
         ],
         "result": {
-            "key": "tile.btanfc.scorched_sandstone",
+            "key": "tile.btanfc.scorched.sandstone",
             "amount": 1,
             "meta": 0
         },
@@ -36,14 +36,14 @@
             {
                 "symbol": "S",
                 "stack": {
-                    "key": "tile.btanfc.scorched_sandstone",
+                    "key": "tile.btanfc.scorched.sandstone",
                     "amount": 1,
                     "meta": 0
                 }
             }
         ],
         "result": {
-            "key": "tile.btanfc.slab.scorched_sandstone",
+            "key": "tile.btanfc.slab.scorched.sandstone",
             "amount": 6,
             "meta": 0
         },
@@ -61,14 +61,14 @@
             {
                 "symbol": "S",
                 "stack": {
-                    "key": "tile.btanfc.scorched_sandstone",
+                    "key": "tile.btanfc.scorched.sandstone",
                     "amount": 1,
                     "meta": 0
                 }
             }
         ],
         "result": {
-            "key": "tile.btanfc.stairs.scorched_sandstone",
+            "key": "tile.btanfc.stairs.scorched.sandstone",
             "amount": 6,
             "meta": 0
         },
@@ -86,14 +86,14 @@
             {
                 "symbol": "S",
                 "stack": {
-                    "key": "tile.btanfc.scorched_sandstone",
+                    "key": "tile.btanfc.scorched.sandstone",
                     "amount": 1,
                     "meta": 0
                 }
             }
         ],
         "result": {
-            "key": "tile.btanfc.brick.scorched_sandstone",
+            "key": "tile.btanfc.brick.scorched.sandstone",
             "amount": 4,
             "meta": 0
         },
@@ -111,14 +111,14 @@
             {
                 "symbol": "S",
                 "stack": {
-                    "key": "tile.btanfc.brick.scorched_sandstone",
+                    "key": "tile.btanfc.brick.scorched.sandstone",
                     "amount": 1,
                     "meta": 0
                 }
             }
         ],
         "result": {
-            "key": "tile.btanfc.slab.brick.scorched_sandstone",
+            "key": "tile.btanfc.slab.brick.scorched.sandstone",
             "amount": 6,
             "meta": 0
         },
@@ -136,14 +136,14 @@
             {
                 "symbol": "S",
                 "stack": {
-                    "key": "tile.btanfc.brick.scorched_sandstone",
+                    "key": "tile.btanfc.brick.scorched.sandstone",
                     "amount": 1,
                     "meta": 0
                 }
             }
         ],
         "result": {
-            "key": "tile.btanfc.stairs.brick.scorched_sandstone",
+            "key": "tile.btanfc.stairs.brick.scorched.sandstone",
             "amount": 6,
             "meta": 0
         },
@@ -238,32 +238,7 @@
             }
         ],
         "result": {
-            "key": "tile.btanfc.carpentry_workstation",
-            "amount": 1,
-            "meta": 0
-        },
-        "consumeContainers": false
-    },
-    {
-        "name": "btanfc:workbench/pebble_block",
-        "type": "minecraft:crafting/shaped",
-        "pattern": [
-            "PP ",
-            "PP ",
-            "   "
-        ],
-        "symbols": [
-            {
-                "symbol": "P",
-                "stack": {
-                    "key": "item.ammo.pebble",
-                    "amount": 1,
-                    "meta": 0
-                }
-            }
-        ],
-        "result": {
-            "key": "tile.btanfc.pebble",
+            "key": "tile.btanfc.carpentry.workstation",
             "amount": 1,
             "meta": 0
         },

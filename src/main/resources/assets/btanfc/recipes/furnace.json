@@ -4,7 +4,7 @@
         "type": "minecraft:smelting",
         "input": {
             "stack": {
-                "key": "tile.btanfc.scorched_sand",
+                "key": "tile.btanfc.scorched.sand",
                 "amount": 1,
                 "meta": 0
             }

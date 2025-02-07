@@ -1,6 +1,6 @@
 package net.helinos.btanfc.gui.guidebook;
 
-import net.helinos.btanfc.gui.guidebook.carpentry.CarpentrySection;
+import net.helinos.btanfc.gui.guidebook.carpentry.GuidebookSectionCarpentry;
 import net.minecraft.client.gui.guidebook.GuidebookSection;
 import net.minecraft.client.gui.guidebook.GuidebookSections;
 
@@ -13,7 +13,7 @@ public abstract class NFCGuidebookSections {
         if (!initialized) {
             initialized = true;
             GuidebookSections.init();
-            CARPENTRY = GuidebookSections.register(new CarpentrySection());
+            CARPENTRY = GuidebookSections.register(new GuidebookSectionCarpentry());
         }
     }
 }

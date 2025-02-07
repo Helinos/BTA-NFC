@@ -2,18 +2,23 @@ package net.helinos.btanfc.block.model;
 
 import java.util.ArrayList;
 
+import net.fabricmc.api.Environment;
+import net.fabricmc.api.EnvType;
 import net.minecraft.client.render.block.model.BlockModelStandard;
-import net.minecraft.client.render.stitcher.IconCoordinate;
-import net.minecraft.client.render.stitcher.TextureRegistry;
+import net.minecraft.client.render.texture.stitcher.IconCoordinate;
+import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.util.helper.Side;
+import net.minecraft.core.util.phys.AABB;
 
-public class BlockModelAxisAlignedVariants<T extends Block> extends BlockModelStandard<T> {
+@Environment(EnvType.CLIENT)
+public class BlockModelAxisAlignedVariants<T extends BlockLogic> extends BlockModelStandard<T> {
     public final int variantCount;
     public final ArrayList<IconCoordinate[]> textures;
 
-    public BlockModelAxisAlignedVariants(Block block, String texturePrefix, String[] variantList) {
+    public BlockModelAxisAlignedVariants(Block<T> block, String texturePrefix, String[] variantList) {
         super(block);
         this.variantCount = variantList.length;
 
@@ -30,7 +35,7 @@ public class BlockModelAxisAlignedVariants<T extends Block> extends BlockModelSt
     }
 
     public boolean render(Tessellator tessellator, int x, int y, int z) {
-        this.block.setBlockBoundsBasedOnState(renderBlocks.blockAccess, x, y, z);
+        AABB bounds = this.block.getBlockBoundsFromState(renderBlocks.blockAccess, x, y, z);
         int metadata = renderBlocks.blockAccess.getBlockMetadata(x, y, z);
         int orientation = metadata >> 6;
         switch (orientation) {
@@ -51,7 +56,7 @@ public class BlockModelAxisAlignedVariants<T extends Block> extends BlockModelSt
                 renderBlocks.uvRotateBottom = 1;
         }
 
-        this.renderStandardBlock(tessellator, this.block, x, y, z);
+        this.renderStandardBlock(tessellator, bounds, x, y, z);
         this.resetRenderBlocks();
         return true;
     }

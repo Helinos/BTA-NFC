@@ -2,16 +2,17 @@ package net.helinos.btanfc.block;
 
 import java.util.Random;
 
-import net.helinos.btanfc.entity.EntityFallingPebble;
-import net.minecraft.core.block.BlockSand;
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockLogicSand;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.EntityFallingBlock;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 
-public class BlockPebble extends BlockSand {
-    public BlockPebble(String key, int id) {
-        super(key, id);
+public class BlockLogicPebble extends BlockLogicSand {
+    public BlockLogicPebble(Block<?> block) {
+        super(block);
     }
 
     @Override
@@ -26,8 +27,8 @@ public class BlockPebble extends BlockSand {
         if (canFallBelow(world, x, y - 1, z) && y >= 0) {
             int range = 32;
             if (!fallInstantly && world.areBlocksLoaded(x - range, y - range, z - range, x + range, y + range, z + range)) {
-                EntityFallingPebble entityfallingsand = new EntityFallingPebble(world, x, y, z, this.id);
-                world.entityJoinedWorld(entityfallingsand);
+                EntityFallingBlock entityFallingBlock = new EntityFallingBlock(world, x + 0.5, y + 0.5, z + 0.5, this.block.id(), 0, null);
+                world.entityJoinedWorld(entityFallingBlock);
             } else {
                 world.setBlockWithNotify(x, y, z, 0);
 
@@ -36,7 +37,7 @@ public class BlockPebble extends BlockSand {
                 }
 
                 if (y > 0) {
-                    world.setBlockAndMetadataWithNotify(x, y, z, this.id, metadata);
+                    world.setBlockWithNotify(x, y, z, this.block.id());
                 }
             }
         }
